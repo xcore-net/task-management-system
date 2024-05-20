@@ -1,23 +1,35 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Laravel App</title>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="jumbotron text-center">
-                        <h1 class="display-4">{{ __('Welcome to My Laravel App!') }}</h1>
-                        <p class="lead">{{ __('This is a simple Laravel application.') }}</p>
-                        <hr class="my-4">
-                        <p>{{ __('Click the button below to learn more.') }}</p>
-                        <a class="btn btn-primary btn-lg" href="#" role="button">{{ __('Learn more') }}</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Add Bootstrap for styling -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+    <style>
+        body {
+            background-color: #f8fafc;
+        }
+        .container {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron text-center">
+        <h1 class="display-4">{{ __('Welcome to My Laravel App!') }}</h1>
+        <p class="lead">{{ __('This is a simple Laravel application.') }}</p>
+        <hr class="my-4">
+        <p>{{ __('Click the button below to learn more.') }}</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">{{ __('Learn more') }}</a>
     </div>
-</x-app-layout>
+</div>
+
+<!-- Add Bootstrap JavaScript -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
