@@ -1,4 +1,4 @@
-<p align="centeer"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
@@ -64,3 +64,107 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## Roles and Permissions
+
+### Step 1: Install the Package
+First, you need to install the package using Composer:
+- composer require spatie/laravel-permission
+
+### Step 2: Publish the Configuration File
+Next, publish the package's configuration file and migration files:
+- php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+### Step 3: Run the Migrations
+Run the migrations to create the necessary tables in your database:
+- php artisan migrate
+
+### Step 4: Setting Up Models
+Add the HasRoles trait to your User model. This trait will provide the necessary methods to assign and check roles and permissions:
+
+namespace App\Models;
+
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
+
+class User extends Authenticatable
+{
+    use HasRoles;
+
+    // Other model code...
+}
+
+### Step 5: Creating Roles and Permissions
+You can create roles and permissions using artisan commands or within your application code.
+
+#### Using Artisan Commands:
+    php artisan permission:create-role admin
+    php artisan permission:create-permission edit articles
+
+#### Using Application Code:
+    use Spatie\Permission\Models\Role;
+    use Spatie\Permission\Models\Permission;
+
+    // Creating a role
+    $role = Role::create(['name' => 'admin']);
+
+    // Creating a permission
+    $permission = Permission::create(['name' => 'edit articles']);
+
+    // Assigning permission to a role
+    $role->givePermissionTo($permission);
+
+### Step 6: Assigning Roles to Users
+You can assign roles to users using the assignRole method:
+    $user = User::find(1);
+    $user->assignRole('admin');
+
+### Step 7: Checking Roles and Permissions
+You can check roles and permissions using methods provided by the HasRoles trait:
+// Check if the user has a specific role
+if ($user->hasRole('admin')) {
+    // User has the 'admin' role
+}
+
+// Check if the user has a specific permission
+if ($user->can('edit articles')) {
+    // User can edit articles
+}
+
+### Step 8: Middleware
+To restrict access to certain routes based on roles or permissions, you can use middleware:
+
+#### Define Middleware in app/Http/Kernel.php:
+    protected $routeMiddleware = [
+    // Other middleware...
+    'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+    'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+    ];
+#### Apply Middleware to Routes:
+    Route::group(['middleware' => ['role:admin']], function () {
+        // Only users with the 'admin' role can access these routes
+    });
+
+    Route::group(['middleware' => ['permission:edit articles']], function () {
+        // Only users with the 'edit articles' permission can access these routes
+    });
+
+### Step 9: Handling Multiple Roles and Permissions
+    The package supports handling multiple roles and permissions. You can assign multiple roles to a user and check for multiple permissions:
+    // Assign multiple roles
+    $user->assignRole(['admin', 'editor']);
+
+    // Check for multiple roles
+    if ($user->hasAnyRole(['admin', 'editor'])) {
+        // User has at least one of the specified roles
+    }
+
+    // Check for multiple permissions
+    if ($user->hasAllPermissions(['edit articles', 'publish articles'])) {
+        // User has all of the specified permissions
+    }
+    
+Conclusion
+By following these steps, you can effectively manage roles and permissions in your Laravel application using the Spatie package. This setup ensures a scalable and maintainable approach to handling user authorization in your project.
+
+https://medium.com/@miladev95/step-by-step-guide-to-user-role-and-permission-tutorial-in-laravel-10-1fecdabfdea0
