@@ -13,10 +13,12 @@ return new class extends Migration
     {
         Schema::create('document_types', function (Blueprint $table) {
             $table->id();
-            
-            $table->unsignedBigInteger('form_template_id');
-            $table->foreign('form_template_id')->references('id')->on('form_templates');
-            
+
+            $table->string('name');
+
+            $table->unsignedBigInteger('form_id');
+            $table->foreign('form_id')->references('id')->on('forms');
+
             $table->timestamps();
         });
     }

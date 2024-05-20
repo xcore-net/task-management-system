@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('task_types', function (Blueprint $table) {
+        Schema::create('uploaded_files', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients');
+
+            $table->unsignedBigInteger('filled_form_id')->nullable();
+            $table->foreign('filled_form_id')->references('id')->on('filled_forms');
 
             $table->timestamps();
         });
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('task_types');
+        Schema::dropIfExists('uploaded_files');
     }
 };

@@ -11,10 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('task_types', function (Blueprint $table) {
+        Schema::create('filled_forms', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
+            $table->unsignedBigInteger('form_id');
+            $table->foreign('form_id')->references('id')->on('forms');
+
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients');
 
             $table->timestamps();
         });
@@ -25,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('task_types');
+        Schema::dropIfExists('filled_forms');
     }
 };

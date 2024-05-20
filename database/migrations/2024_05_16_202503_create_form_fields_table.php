@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('filled_forms', function (Blueprint $table) {
+        Schema::create('form_fields', function (Blueprint $table) {
             $table->id();
-            
-            $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients');
-            
-            $table->unsignedBigInteger('form_template_id');
-            $table->foreign('form_template_id')->references('id')->on('form_templates');
+
+            $table->unsignedBigInteger('form_id');
+            $table->foreign('form_id')->references('id')->on('forms');
+
+            $table->unsignedBigInteger('field_id');
+            $table->foreign('field_id')->references('id')->on('fields');
 
             $table->timestamps();
         });
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('filled_forms');
+        Schema::dropIfExists('form_fields');
     }
 };
