@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,8 +19,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/test', function () {
-    return view('first_view');
-});
+#Route::get('/test', function () {
+ #   return view('first_view');
+#});
+
+Route::get('/test', [ClientController::class, 'index'])->name('first_view');
+
 
 require __DIR__.'/auth.php';
