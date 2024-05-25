@@ -23,7 +23,7 @@ Route::middleware('auth')->group(function () {
  #   return view('first_view');
 #});
 
-Route::get('/test', [ClientController::class, 'index'])->name('first_view');
-
+Route::get('/test', [ClientController::class, 'index'])->name('clients_view');
+Route::post('test',[ClientController::class,'store'])->name('store');
 
 require __DIR__.'/auth.php';

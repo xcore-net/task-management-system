@@ -34,7 +34,7 @@
                 <td>{{ $client->email }}</td>
                 <td>{{ $client->phone }}</td>
                 <td>
-                    <!--<a href="" class="btn btn-primary">Edit</a>-->
+                    <a href="" class="btn btn-primary">Edit</a>
                     <form action="" method="POST" style="display: inline-block">
                         @csrf
                         @method('DELETE')
@@ -45,6 +45,24 @@
         @endforeach
         </tbody>
     </table>
+
+
+<div class="widget">
+    <h2>Add Client</h2>  <form method="POST" action="{{ route('store') }}">  @csrf  <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" name="name" id="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" name="email" id="email" required>
+        </div>
+        <div class.form-group>
+            <label for="phone">Phone:</label>
+            <input type="tel" class="form-control" name="phone" id="phone" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Client</button>
+    </form>
+</div>
 
 <!--<a href="" class="btn btn-success">Create New Client</a>
 -->
