@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\clients;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -37,6 +38,18 @@ class ClientController extends Controller
         return redirect()->route('clients_view')->with('success', 'Client created successfully!');
 
     }
+
+    public function destroy($id): RedirectResponse
+    {
+
+        DB::delete('DELETE FROM clients WHERE id = ?', [$id]);
+
+
+            return redirect()->route('clients_view')->with('success', 'Client deleted successfully!');
+
+
+    }
+
 
 
 

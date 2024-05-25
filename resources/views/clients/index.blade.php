@@ -35,7 +35,7 @@
                 <td>{{ $client->phone }}</td>
                 <td>
                     <a href="" class="btn btn-primary">Edit</a>
-                    <form action="" method="POST" style="display: inline-block">
+                    <form action="{{route('client.destroy', $client->id)}}" method="POST" style="display: inline-block">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>
@@ -48,7 +48,7 @@
 
 
 <div class="widget">
-    <h2>Add Client</h2>  <form method="POST" action="{{ route('store') }}">  @csrf  <div class="form-group">
+    <h2>Add Client</h2>  <form method="POST" action="{{ route('client.store') }}">  @csrf  <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" name="name" id="name" required>
         </div>
