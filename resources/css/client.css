@@ -1,0 +1,8 @@
+.client-creator-form{
+    display: flex;
+}
+
+.form-group{
+    padding: 1em;
+    color:red
+}
