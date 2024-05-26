@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FieldController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClientController;
 use Illuminate\Support\Facades\Route;
@@ -14,14 +15,17 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/field', [FieldController::class, 'index'])->name('field.index');
+    Route::get('/field/create', [FieldController::class, 'create'])->name('field.create');
+    Route::post('/field/store', [FieldController::class, 'store'])->name('field.store');
+
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
-#Route::get('/test', function () {
- #   return view('first_view');
-#});
 
 Route::get('/test', [ClientController::class, 'index'])->name('clients_view');
 Route::post('test',[ClientController::class,'store'])->name('client.store');
