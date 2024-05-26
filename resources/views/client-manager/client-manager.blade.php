@@ -25,6 +25,7 @@ tr>*{
 tr::{color:lightblue}
    </style>
 </header>
+
 <form class="client-creator-form" action="/client" method="POST">
     @csrf
     <div class="form-group">
