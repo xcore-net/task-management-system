@@ -11,4 +11,8 @@ class Field extends Model
     protected $fillable = [
         'name', 'label'
     ];
+    public function forms(){
+
+    return $this->belongsToMany(Form::class,'form_fields');
+    }
 }

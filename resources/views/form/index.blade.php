@@ -21,25 +21,32 @@
                                 <th>ID</th>
                                 <th>Title</th>
                                 <th>Description</th>
+                                <th>Fields</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($forms as $field)
+                            @forelse ($forms as $form)
                             <tr>
-                                <td>{{ $field->id }}</td>
-                                <td>{{ $field->title }}</td>
-                                <td>{{ $field->description }}</td>
-                                <td>{{ $field->created_at }}</td>
-                                <td>{{ $field->updated_at }}</td>
+                                <td>{{ $form->id }}</td>
+                                <td>{{ $form->title }}</td>
+                                <td>{{ $form->description }}</td>
+                                <td><select>
+                                     @foreach ($form->fields as $field)
+                                     <option value="{{ $field->id }}">{{ $field->label }}</option>
+                                      @endforeach
+                                    </select></td>
+                                    
+                                <td>{{ $form->created_at }}</td>
+                                <td>{{ $form->updated_at }}</td>
                                 <td>
-                                    <a href="{{ url('/form/' . $field->id) }}" class="btn btn-xs btn-info pull-right">View</a>
-                                    <a href="{{ url('/form/' . $field->id . '/edit') }}" class="btn btn-xs btn-info pull-right">Edit</a>
+                                    <a href="{{ url('/form/' . $form->id) }}" class="btn btn-xs btn-info pull-right">View</a>
+                                    <a href="{{ url('/form/' . $form->id . '/edit') }}" class="btn btn-xs btn-info pull-right">Edit</a>
                                     <!-- Delete Button -->
 
-                                    <form method="POST" action="{{ route('form.destroy', $field->id) }}">
+                                    <form method="POST" action="{{ route('form.destroy', $form->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this form?');">

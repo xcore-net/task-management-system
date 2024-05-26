@@ -11,4 +11,8 @@ class Form extends Model
     protected $fillable = [
         'title', 'description'
     ];
+    public function fields(){
+
+        return $this->belongsToMany(Field::class,'form_fields');
+        }
 }
