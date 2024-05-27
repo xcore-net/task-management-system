@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Form;
+use Illuminate\Validation\ValidationException;
 
 class FormController extends Controller
 {
@@ -27,7 +28,7 @@ class FormController extends Controller
     /**
      * Handle an incoming form request.
      *
-     * @throws \Illuminate\Validation\ValidationException
+     * @throws ValidationException
      */
     public function store(Request $request): RedirectResponse
     {
