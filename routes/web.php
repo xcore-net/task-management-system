@@ -4,7 +4,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FieldController;
-use App\Http\Controllers\FormFieldController;
+use App\Http\Controllers\DocumentTypeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -62,6 +62,17 @@ Route::middleware('auth')->group(function () {
         'field.destroy'
     );
 
+    //Doc types
+    Route::get('/documentType', [DocumentTypeController::class, 'index'])->name('documentType.index');
+Route::get('/documentType/create', [DocumentTypeController::class, 'create'])->name('documentType.create');
+Route::post('/documentType/store', [DocumentTypeController::class, 'store'])->name('documentType.store');
+Route::get('/documentType/{id}', [DocumentTypeController::class, 'show'])->name('documentType.show');
+Route::get('/documentType/{id}/edit', [DocumentTypeController::class, 'edit'])->name('documentType.edit');
+Route::put('/documentType/{id}', [DocumentTypeController::class, 'update'])->name('documentType.update');
+Route::delete('/documentType/{id}', [DocumentTypeController::class, 'destroy'])->name('documentType.destroy');
+
+
+    //profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name(
         'profile.edit'
     );

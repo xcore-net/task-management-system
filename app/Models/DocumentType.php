@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-class Client extends Model
+
+class DocumentType extends Model
 {
     use HasFactory;
-    public function documentTypes(): BelongsToMany
+    public function clients(): BelongsToMany
     {
-        return $this->belongsToMany(DocumentType::class,'document_requests');
+        return $this->belongsToMany(Client::class,'document_requests');
     }
 }
