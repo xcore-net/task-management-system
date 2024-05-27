@@ -18,6 +18,30 @@ Route::get('/dashboard', function () {
     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    //client
+    Route::get('/client', [ClientController::class, 'index'])->name(
+        'client.index'
+    );
+    Route::get('/client/create', [ClientController::class, 'create'])->name(
+        'client.create'
+    );
+    Route::post('/client/store', [ClientController::class, 'store'])->name(
+        'client.store'
+    );
+    Route::get('/client/{id}', [ClientController::class, 'show'])->name(
+        'client.show'
+    );
+    Route::get('/client/{id}/edit', [ClientController::class, 'edit'])->name(
+        'client.edit'
+    );
+    Route::put('/client/{id}', [ClientController::class, 'update'])->name(
+        'client.update'
+    );
+    Route::delete('/client/{id}', [ClientController::class, 'destroy'])->name(
+        'client.destroy'
+    );
+
+    //form
     Route::get('/form', [FormController::class, 'index'])->name('form.index');
     Route::get('/form/create', [FormController::class, 'create'])->name(
         'form.create'
@@ -63,14 +87,38 @@ Route::middleware('auth')->group(function () {
     );
 
     //Doc types
-    Route::get('/documentType', [DocumentTypeController::class, 'index'])->name('documentType.index');
-Route::get('/documentType/create', [DocumentTypeController::class, 'create'])->name('documentType.create');
-Route::post('/documentType/store', [DocumentTypeController::class, 'store'])->name('documentType.store');
-Route::get('/documentType/{id}', [DocumentTypeController::class, 'show'])->name('documentType.show');
-Route::get('/documentType/{id}/edit', [DocumentTypeController::class, 'edit'])->name('documentType.edit');
-Route::put('/documentType/{id}', [DocumentTypeController::class, 'update'])->name('documentType.update');
-Route::delete('/documentType/{id}', [DocumentTypeController::class, 'destroy'])->name('documentType.destroy');
+    Route::get('/documentType', [DocumentTypeController::class, 'index'])->name(
+        'documentType.index'
+    );
+    Route::get('/documentType/create', [
+        DocumentTypeController::class,
+        'create',
+    ])->name('documentType.create');
 
+    Route::post('/documentType/store', [
+        DocumentTypeController::class,
+        'store',
+    ])->name('documentType.store');
+
+    Route::get('/documentType/{id}', [
+        DocumentTypeController::class,
+        'show',
+    ])->name('documentType.show');
+
+    Route::get('/documentType/{id}/edit', [
+        DocumentTypeController::class,
+        'edit',
+    ])->name('documentType.edit');
+
+    Route::put('/documentType/{id}', [
+        DocumentTypeController::class,
+        'update',
+    ])->name('documentType.update');
+    
+    Route::delete('/documentType/{id}', [
+        DocumentTypeController::class,
+        'destroy',
+    ])->name('documentType.destroy');
 
     //profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name(
@@ -81,18 +129,6 @@ Route::delete('/documentType/{id}', [DocumentTypeController::class, 'destroy'])-
     );
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name(
         'profile.destroy'
-    );
-});
-
-Route::middleware('auth')->group(function () {
-    Route::get('/client', [ClientController::class, 'index'])->name(
-        'client.index'
-    );
-    Route::post('/client', [ClientController::class, 'store'])->name(
-        'client.store'
-    );
-    Route::delete('/client/{id}', [ClientController::class, 'destory'])->name(
-        'client.destroy'
     );
 });
 

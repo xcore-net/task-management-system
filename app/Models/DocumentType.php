@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class DocumentType extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name'
+    ];
     public function clients(): BelongsToMany
     {
         return $this->belongsToMany(Client::class,'document_requests');

@@ -7,7 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 use App\Models\DocumentType;
-
+use App\Models\Form;
 class DocumentTypeController extends Controller
 {
     public function index()
@@ -18,14 +18,23 @@ class DocumentTypeController extends Controller
 
     public function create(): View
     {
-        return view('documentType.create');
+        $forms = Form::all();
+        return view('documentType.create',['forms'=>$forms]);
     }
 
     public function store(Request $request)
     {
         $documentType = new DocumentType();
-        $documentType->name = $request->name;
-        $documentType->save();
+        $request->validate([
+            'name' => ['required', 'string', 'max:100'],
+            'form_id'=>['required|exists:forms,id']
+        ]);
+
+        $documentType->create([
+            'name' => $request->name,
+            'form_id' => $request->form_id,
+        ]);
+      
     }
 
     public function show(string $id): View
@@ -51,10 +60,12 @@ class DocumentTypeController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
+            'form_id'=>['required|exists:forms,id']
         ]);
 
         $documentType->update([
             'name' => $request->name,
+            'form_id' => $request->form_id,
         ]);
 
         return redirect(route('documentType.index', absolute: false));
