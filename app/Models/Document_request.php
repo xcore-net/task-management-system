@@ -9,6 +9,7 @@ use MongoDB\BSON\Document;
 class Document_request extends Model
 {
     use HasFactory;
+    protected $fillable = ['client_id','document_id'];
     public function client(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(clients::class);
