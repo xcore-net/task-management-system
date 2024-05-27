@@ -11,4 +11,8 @@ class Form extends Model
     protected $fillable = [
         'title', 'description'
     ];
+    public function document_type(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Document_type::class);
+    }
 }

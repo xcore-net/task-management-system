@@ -20,34 +20,77 @@ class ClientController extends Controller
     public function index(): View
     {
         $clients = clients::all();
-        return view('clients.index', ['clients' => $clients]);
+
+        return view('client.index', ['clients' => $clients]);
     }
 
-
-
+    public function create(): View
+    {
+        return view('client.create');
+    }
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:clients,email', // Unique email validation
-            'phone' => 'required|string|min:10|max:10', // Adjust phone number validation as needed
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required','email', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
+
         ]);
 
-        $client = clients::create($request->all());
+        clients::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone'=> $request->phone,
+        ]);
 
-        return redirect()->route('clients_view')->with('success', 'Client created successfully!');
-
+        return redirect(route('client.index', absolute: false));
     }
 
-    public function destroy($id): RedirectResponse
+    public function show(string $id): View
     {
+        $client = clients::findOrFail($id);
 
-        DB::delete('DELETE FROM clients WHERE id = ?', [$id]);
+        if (!$client) {
+            // Handle client not found
+        }
 
+        return view('client.show', [
+            'client' => $client,
+        ]);
+    }
 
-            return redirect()->route('clients_view')->with('success', 'Client deleted successfully!');
+    public function edit(string $id): View
+    {
+        $client = clients::findOrFail($id);
+        return view('client.create', [
+            'client' => $client,
+        ]);
+    }
+    public function update(Request $request, string $id): RedirectResponse
+    {
+        $client = clients::findOrFail($id);
 
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required','email', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
+        ]);
 
+        $client->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone'=> $request->phone
+        ]);
+
+        return redirect(route('client.index', absolute: false));
+    }
+
+    public function destroy(string $id): RedirectResponse
+    {
+        $client = clients::findOrFail($id);
+        $client->delete();
+
+        return redirect(route('client.index', absolute: false))->with('success', 'Client deleted successfully');
     }
 
 

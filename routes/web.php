@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DocumentRequestController;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
@@ -31,6 +33,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/field/{id}/edit', [FieldController::class, 'edit'])->name('field.edit');
     Route::put('/field/{id}', [FieldController::class, 'update'])->name('field.update');
     Route::delete('/field/{id}', [FieldController::class, 'destroy'])->name('field.destroy');
+
+    #---client routes---
+    Route::get('/client', [ClientController::class, 'index'])->name('client.index');
+    Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
+    Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
+    Route::get('/client/{id}', [ClientController::class, 'show'])->name('client.show');
+    Route::get('/client/{id}/edit', [ClientController::class, 'edit'])->name('client.edit');
+    Route::put('/client/{id}', [ClientController::class, 'update'])->name('client.update');
+    Route::delete('/client/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
+
+    #---document_request routes---
+    Route::get('/document_request', [DocumentRequestController::class, 'index'])->name('document_request.index');
+    Route::get('/document_request/create', [DocumentRequestController::class, 'create'])->name('document_request.create');
+    Route::post('/document_request/store', [DocumentRequestController::class, 'store'])->name('document_request.store');
+    Route::get('/document_request/{id}', [DocumentRequestController::class, 'show'])->name('document_request.show');
+    Route::get('/document_request/{id}/edit', [DocumentRequestController::class, 'edit'])->name('document_request.edit');
+    Route::put('/document_request/{id}', [DocumentRequestController::class, 'update'])->name('document_request.update');
+    Route::delete('/document_request/{id}', [DocumentRequestController::class, 'destroy'])->name('document_request.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

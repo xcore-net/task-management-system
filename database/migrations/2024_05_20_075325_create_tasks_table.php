@@ -16,7 +16,7 @@ return new class extends Migration
 
 
             $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('client');
 
             $table->unsignedBigInteger('document_request_id');
             $table->foreign('document_request_id')->references('id')->on('document_requests');
