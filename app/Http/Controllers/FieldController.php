@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\Field;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
+
 class FieldController extends Controller
 {
     public function index(): View
     {
-        $fields = Field::all();
-        return view('field.index', ['fields' => $fields]);
+        $field = Field::all();
+
+        return view('field.index', ['fields' => $field]);
     }
 
     public function create(): View
@@ -23,14 +24,56 @@ class FieldController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'lable' => 'required|string|email|unique:clients,email', // Unique email validation
+            'name' => ['required', 'string', 'max:255'],
+            'label' => ['required', 'string', 'max:255'],
         ]);
 
-        $field = Field::create($request->all());
+        Field::create([
+            'name' => $request->name,
+            'label' => $request->label,
+        ]);
 
-        return redirect()->route('field.index')->with('success', 'Client created successfully!');
-
+        return redirect(route('field.index', absolute: false));
     }
 
+    public function show(string $id): View
+    {
+        $field = Field::findOrFail($id);
+
+        return view('field.show', [
+            'field' => $field,
+        ]);
+    }
+
+    public function edit(string $id): View
+    {
+        $field = Field::findOrFail($id);
+        return view('field.create', [
+            'field' => $field,
+        ]);
+    }
+    public function update(Request $request, string $id): RedirectResponse
+    {
+        $field = Field::findOrFail($id);
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'label' => ['required', 'string', 'max:255'],
+        ]);
+
+        $field->update([
+            'name' => $request->name,
+            'label' => $request->label,
+        ]);
+
+        return redirect(route('field.index', absolute: false));
+    }
+
+    public function destroy(string $id): RedirectResponse
+    {
+        $field = Field::findOrFail($id);
+        $field->delete();
+
+        return redirect(route('field.index', absolute: false))->with('success', 'Field deleted successfully');
+    }
 }

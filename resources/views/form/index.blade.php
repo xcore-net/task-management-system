@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Field') }}
+            {{ __('Form') }}
         </h2>
     </x-slot>
 
@@ -9,8 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("This is Field Page!") }}
-                    <x-nav-link :href="route('field.create')">
+                    {{ __("This is Form Page!") }}
+                    <x-nav-link :href="route('form.create')">
                         {{ __('Create') }}
                     </x-nav-link>
                 </div>
@@ -19,30 +19,30 @@
                         <thead>
                             <tr class="text-left">
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>Label</th>
+                                <th>Title</th>
+                                <th>Description</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($fields as $field)
+                            @forelse ($forms as $form)
                             <tr>
-                                <td>{{ $field->id }}</td>
-                                <td>{{ $field->name }}</td>
-                                <td>{{ $field->label }}</td>
-                                <td>{{ $field->created_at }}</td>
-                                <td>{{ $field->updated_at }}</td>
+                                <td>{{ $form->id }}</td>
+                                <td>{{ $form->title }}</td>
+                                <td>{{ $form->description }}</td>
+                                <td>{{ $form->created_at }}</td>
+                                <td>{{ $form->updated_at }}</td>
                                 <td>
-                                    <a href="{{ url('/field/' . $field->id) }}" class="btn btn-xs btn-info pull-right">View</a>
-                                    <a href="{{ url('/field/' . $field->id . '/edit') }}" class="btn btn-xs btn-info pull-right">Edit</a>
+                                    <a href="{{ url('/form/' . $form->id) }}" class="btn btn-xs btn-info pull-right">View</a>
+                                    <a href="{{ url('/form/' . $form->id . '/edit') }}" class="btn btn-xs btn-info pull-right">Edit</a>
                                     <!-- Delete Button -->
 
-                                    <form method="POST" action="{{ route('field.destroy', $field->id) }}">
+                                    <form method="POST" action="{{ route('form.destroy', $form->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this field?');">
+                                        <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this form?');">
                                             {{ __('Delete') }}
                                         </x-danger-button>
                                     </form>
@@ -52,7 +52,7 @@
 
                             @empty
                             <tr>
-                                <td>no fields</td>
+                                <td>no forms</td>
                             </tr>
                             @endforelse
 
@@ -64,6 +64,4 @@
 
                 </div>
             </div>
-        </div>
-    </div>
 </x-app-layout>
