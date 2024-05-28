@@ -70,7 +70,6 @@ class FormController extends Controller
     public function update(Request $request, string $id): RedirectResponse
     {
         $form = Form::findOrFail($id);
-        $fields = Field::all();
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
@@ -91,7 +90,6 @@ class FormController extends Controller
         $form = Form::findOrFail($id);
         $form->fields()->detach();
         $form->delete();
-
         return redirect(route('form.index', absolute: false))->with('success', 'Form deleted successfully');
     }
 }

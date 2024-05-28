@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Models\DocumentType;
 use App\Models\Form;
+
 class DocumentTypeController extends Controller
 {
     public function index()
@@ -19,22 +20,22 @@ class DocumentTypeController extends Controller
     public function create(): View
     {
         $forms = Form::all();
-        return view('documentType.create',['forms'=>$forms]);
+        return view('documentType.create', ['forms' => $forms]);
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $documentType = new DocumentType();
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'form_id'=>['required|exists:forms,id']
+            'form_id' => ['required', 'integer']
         ]);
 
-        $documentType->create([
+        $documentType::create([
             'name' => $request->name,
-            'form_id' => $request->form_id,
+            'form_id' => $request->form_id
         ]);
-      
+        return redirect(route('documentType.index', absolute: false));
     }
 
     public function show(string $id): View
@@ -49,8 +50,9 @@ class DocumentTypeController extends Controller
     public function edit(string $id): View
     {
         $documentType = DocumentType::findOrFail($id);
+        $forms = Form::all();
         return view('documentType.create', [
-            'documentType' => $documentType,
+            'documentType' => $documentType,'forms' => $forms
         ]);
     }
 
@@ -60,12 +62,12 @@ class DocumentTypeController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'form_id'=>['required|exists:forms,id']
+            'form_id' => ['required', 'integer']
         ]);
 
         $documentType->update([
             'name' => $request->name,
-            'form_id' => $request->form_id,
+            'form_id' => $request->form_id
         ]);
 
         return redirect(route('documentType.index', absolute: false));

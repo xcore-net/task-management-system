@@ -1,7 +1,6 @@
 <x-app-layout>
     <form  method="POST" action="{{ isset($documentType) ? route('documentType.update', $documentType->id) : route('documentType.store') }}">
         @csrf
-
         <!-- If editing, add method spoofing -->
         @if(isset($documentType))
         @method('PUT')
@@ -13,15 +12,15 @@
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name', isset($documentType) ? $documentType->name : '')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
-        <!-- Form -->
+        <!-- Form ID -->
         <div>
-            <x-input-label for="forms" :value="__('Form')" />
-            <select name="forms" class="bg-transparent text-white" id="forms">
+            <x-input-label for="doc-type-form" :value="__('Form')" />
+            <select name="form_id" class="bg-transparent text-white" id="doc-type-form">
                 @foreach ($forms as $form)
                     <option  value="{{ $form->id }}">{{ $form->title }}</option>
                 @endforeach
             </select>
-            <x-input-error :messages="$errors->get('form')" class="mt-2" />
+            <x-input-error :messages="$errors->get('form_id')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

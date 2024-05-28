@@ -20,7 +20,7 @@
                             <tr class="text-left">
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Form</th>
+                                <th>Form id</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
