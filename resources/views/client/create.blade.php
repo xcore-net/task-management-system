@@ -37,6 +37,15 @@
                 @endforeach
             </select>
         </div>
+         <!-- Forms -->
+         <div>
+            <x-input-label for="forms" :value="__('Forms')" />
+            <select name="forms[]" class="bg-transparent" id="forms" multiple>
+                @foreach ($forms as $form)
+                    <option class="text-white" value="{{ $form->id }}">{{ $form->title }}</option>
+                @endforeach
+            </select>
+        </div>
         
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="ms-4">

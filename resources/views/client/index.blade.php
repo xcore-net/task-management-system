@@ -23,13 +23,14 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Document Types</th>
+                                <th>Filled Forms</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($clients as $client)
+                            @forelse ($clients as $client)`
                             <tr>
                                 <td>{{ $client->id }}</td>
                                 <td>{{ $client->name }}</td>
@@ -38,6 +39,11 @@
                                 <td><select>
                                      @foreach ($client->documentTypes as $documentType)
                                      <option value="{{ $documentType->id }}">{{ $documentType->label }}</option>
+                                      @endforeach
+                                    </select></td>
+                                <td><select>
+                                     @foreach ($client->forms as $form)
+                                     <option value="{{ $form->id }}">{{ $form->title }}</option>
                                       @endforeach
                                     </select></td>
                                     

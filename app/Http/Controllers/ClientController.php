@@ -8,6 +8,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Client;
 use App\Models\DocumentType;
+use App\Models\Form;
+
 
 class ClientController extends Controller
 {
@@ -23,8 +25,9 @@ class ClientController extends Controller
      */
     public function create(): View
     {
-           $documentTypes = DocumentType::all();
-        return view('Client.create', compact('documentTypes'));
+        $documentTypes = DocumentType::all();
+        $forms= Form::all();
+        return view('Client.create', ['documentTypes'=>$documentTypes,"forms"=>$forms]);
     }
     /**
      * Handle an incoming client request.
@@ -35,19 +38,19 @@ class ClientController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string','email', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
-            'documentTypes'=>['required','array']
+            'documentTypes' => ['required', 'array']
         ]);
 
         $client = Client::create([
-            
             'name' => $request->name,
             'email' => $request->email,
-            'phone'=>$request->phone
+            'phone' => $request->phone
         ]);
-        
+
         $client->documentTypes()->sync($request->documentTypes);
+        $client->forms()->sync($request->forms);
         return redirect(route('client.index', absolute: false));
     }
 
@@ -62,31 +65,30 @@ class ClientController extends Controller
 
     public function edit(string $id): View
     {
-        $client = Client::findOrFail($id);
         $documentTypes = DocumentType::all();
+        $forms= Form::all();
         return view('client.create', [
-            'client' => $client,
-            'documentTypes' => $documentTypes,
+            'documentTypes' => $documentTypes,'forms'=>$forms
         ]);
     }
 
     public function update(Request $request, string $id): RedirectResponse
     {
         $client = Client::findOrFail($id);
-        $documentTypes = DocumentType::all();
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string','email', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => ['required', 'regex:/^([0-9\s\-\+\(\)]*)$/', 'min:10'],
-            'documentTypes'=>['required','array']
+            'documentTypes' => ['required', 'array']
         ]);
-
+        $client->forms()->sync($request->forms);
         $client->update([
             'name' => $request->name,
             'email' => $request->email,
-            'phone'=>$request->phone
+            'phone' => $request->phone
         ]);
         $client->documentTypes()->sync($request->documentTypes);
+        $client->forms()->sync($request->forms);
 
         return redirect(route('client.index', absolute: false));
     }
@@ -95,6 +97,7 @@ class ClientController extends Controller
     {
         $client = Client::findOrFail($id);
         $client->documentTypes()->detach();
+        $client->forms()->detach();
         $client->delete();
 
         return redirect(route('client.index', absolute: false))->with('success', 'Client deleted successfully');
