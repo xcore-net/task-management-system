@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssigneeController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClientController;
@@ -114,11 +115,20 @@ Route::middleware('auth')->group(function () {
         DocumentTypeController::class,
         'update',
     ])->name('documentType.update');
-    
+
     Route::delete('/documentType/{id}', [
         DocumentTypeController::class,
         'destroy',
     ])->name('documentType.destroy');
+
+    //Assignee
+    Route::get('/assignee', [AssigneeController::class, 'index'])->name('assignee.index');
+    Route::get('/assignee/create', [AssigneeController::class, 'create'])->name('assignee.create');
+    Route::post('/assignee/store', [AssigneeController::class, 'store'])->name('assignee.store');
+    Route::get('/assignee/{id}', [AssigneeController::class, 'show'])->name('assignee.show');
+    Route::get('/assignee/{id}/edit', [AssigneeController::class, 'edit'])->name('assignee.edit');
+    Route::put('/assignee/{id}', [AssigneeController::class, 'update'])->name('assignee.update');
+    Route::delete('/assignee/{id}', [AssigneeController::class, 'destroy'])->name('assignee.destroy');
 
     //profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name(
@@ -132,6 +142,7 @@ Route::middleware('auth')->group(function () {
     );
 });
 
-Route::middleware('auth')->group(function () {});
+Route::middleware('auth')->group(function () {
+});
 
 require __DIR__ . '/auth.php';

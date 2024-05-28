@@ -17,8 +17,8 @@ class DocumentType extends Model
         return $this->belongsToMany(Client::class, 'document_requests');
     }
  
-    public function forms(): HasMany
+    public function forms(): BelongsTo
     {
-        return $this->hasMany(Form::class);
+        return $this->belongsTo(Form::class);
     }
 }
