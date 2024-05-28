@@ -15,4 +15,8 @@ class Client extends Model
     {
         return $this->belongsToMany(DocumentType::class,'document_requests');
     }
+    public function forms(): BelongsToMany
+    {
+        return $this->belongsToMany(Form::class,'filled_forms');
+    }
 }

@@ -13,7 +13,7 @@
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name', isset($documentType) ? $documentType->name : '')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
-<!-- Form -->
+        <!-- Form -->
         <div>
             <x-input-label for="forms" :value="__('Form')" />
             <select name="forms" class="bg-transparent text-white" id="forms">
