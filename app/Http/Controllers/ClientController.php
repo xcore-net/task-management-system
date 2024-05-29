@@ -26,8 +26,8 @@ class ClientController extends Controller
     public function create(): View
     {
         $documentTypes = DocumentType::all();
-        $forms= Form::all();
-        return view('Client.create', ['documentTypes'=>$documentTypes,"forms"=>$forms]);
+        $forms = Form::all();
+        return view('Client.create', ['documentTypes' => $documentTypes, "forms" => $forms]);
     }
     /**
      * Handle an incoming client request.
@@ -65,10 +65,12 @@ class ClientController extends Controller
 
     public function edit(string $id): View
     {
+        $client = client::findorfail($id);
         $documentTypes = DocumentType::all();
-        $forms= Form::all();
+        $forms = Form::all();
         return view('client.create', [
-            'documentTypes' => $documentTypes,'forms'=>$forms
+            'client' => $client,
+            'documentTypes' => $documentTypes, 'forms' => $forms
         ]);
     }
 

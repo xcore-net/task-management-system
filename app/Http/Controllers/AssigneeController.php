@@ -20,7 +20,7 @@ class AssigneeController extends Controller
     public function create(): View
     {
         $users = User::all();
-        return view('assignee.create', ['users' => $users]);
+        return view('assignee.create',['users'=>$users]);
     }
 
     public function store(Request $request): RedirectResponse
@@ -31,7 +31,7 @@ class AssigneeController extends Controller
         ]);
 
         $assignee::create([
-            'user_id' => $request->form_id
+            'user_id' => $request->user_id
         ]);
         return redirect(route('assignee.index', absolute: false));
     }
@@ -50,7 +50,7 @@ class AssigneeController extends Controller
         $assignee = Assignee::findOrFail($id);
         $users = User::all();
         return view('assignee.create', [
-            'assignee' => $assignee,'users' => $users
+            'assignee' => $assignee,'users'=>$users
         ]);
     }
 
@@ -65,13 +65,14 @@ class AssigneeController extends Controller
         $assignee->update([
             'user_id' => $request->user_id
         ]);
-
+        
         return redirect(route('assignee.index', absolute: false));
     }
 
     public function destroy(string $id): RedirectResponse
     {
         $assignee = Assignee::findOrFail($id);
+        $assignee->taskTypes()->detach();
         $assignee->delete();
 
         return redirect(route('assignee.index', absolute: false))->with('success', 'Assignee deleted successfully');
