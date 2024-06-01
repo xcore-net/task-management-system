@@ -8,6 +8,8 @@ use App\Http\Controllers\FieldController;
 use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\DocumentRequestController;
 use App\Http\Controllers\TaskTypeController;
+use App\Http\Controllers\UploadedfilesController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -84,6 +86,25 @@ Route::middleware('auth')->group(function () {
     Route::get('/taskType/{id}/edit', [TaskTypeController::class, 'edit'])->name('taskType.edit');
     Route::put('/taskType/{id}', [TaskTypeController::class, 'update'])->name('taskType.update');
     Route::delete('/taskType/{id}', [TaskTypeController::class, 'destroy'])->name('taskType.destroy');
+
+    //Uploded Files
+    Route::get('/uploaded_files', [UploadedfilesController::class, 'index'])->name('uploaded_files.index');
+    Route::get('/uploaded_files/create', [UploadedfilesController::class, 'create'])->name('uploaded_files.create');
+    Route::post('/uploaded_files/store', [UploadedfilesController::class, 'store'])->name('uploaded_files.store');
+    Route::get('/uploaded_files/{id}', [UploadedfilesController::class, 'show'])->name('uploaded_files.show');
+    Route::get('/uploaded_files/{id}/edit', [UploadedfilesController::class, 'edit'])->name('uploaded_files.edit');
+    Route::put('/uploaded_files/{id}', [UploadedfilesController::class, 'update'])->name('uploaded_files.update');
+    Route::delete('/uploaded_files/{id}', [UploadedfilesController::class, 'destroy'])->name('uploaded_files.destroy');
+
+    //Task
+    Route::get('/task', [TaskController::class, 'index'])->name('task.index');
+    Route::get('/task/create', [TaskController::class, 'create'])->name('task.create');
+    Route::post('/task/store', [TaskController::class, 'store'])->name('task.store');
+    Route::get('/task/{id}', [TaskController::class, 'show'])->name('task.show');
+    Route::get('/task/{id}/edit', [TaskController::class, 'edit'])->name('task.edit');
+    Route::put('/task/{id}', [TaskController::class, 'update'])->name('task.update');
+    Route::delete('/task/{id}', [TaskController::class, 'destroy'])->name('task.destroy');
+
 
     //profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
