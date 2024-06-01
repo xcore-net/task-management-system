@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FieldController;
 use App\Http\Controllers\DocumentTypeController;
+use App\Http\Controllers\DocumentRequestController;
 use App\Http\Controllers\TaskTypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/documentType/{id}/edit', [DocumentTypeController::class, 'edit'])->name('documentType.edit');
     Route::put('/documentType/{id}', [DocumentTypeController::class, 'update'])->name('documentType.update');
     Route::delete('/documentType/{id}', [DocumentTypeController::class, 'destroy'])->name('documentType.destroy');
+
+    //Doc request
+    Route::get('/document_request', [DocumentRequestController::class, 'index'])->name('document_request.index');
+    Route::get('/document_request/create', [DocumentRequestController::class, 'create'])->name('document_request.create');
+    Route::post('/document_request/store', [DocumentRequestController::class, 'store'])->name('document_request.store');
+    Route::get('/document_request/{id}', [DocumentRequestController::class, 'show'])->name('document_request.show');
+    Route::get('/document_request/{id}/edit', [DocumentRequestController::class, 'edit'])->name('document_request.edit');
+    Route::put('/document_request/{id}', [DocumentRequestController::class, 'update'])->name('document_request.update');
+    Route::delete('/document_request/{id}', [DocumentRequestController::class, 'destroy'])->name('document_request.destroy');
+
 
     //Assignee
     Route::get('/assignee', [AssigneeController::class, 'index'])->name('assignee.index');
