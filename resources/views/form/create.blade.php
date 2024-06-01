@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form method="POST" action="{{ isset($form) ? route('form.update', $form->id) : route('form.store') }}">
+    <form  method="POST" action="{{ isset($form) ? route('form.update', $form->id) : route('form.store') }}">
         @csrf
 
         <!-- If editing, add method spoofing -->
@@ -19,6 +19,15 @@
             <x-input-label for="description" :value="__('Description')" />
             <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description', isset($form) ? $form->description : '')" required autocomplete="description" />
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
+        </div>
+
+        <div>
+        <x-input-label for="form-fields" :value="__('Fields')" />
+            <select name="fields[]" class="bg-transparent" id="form-fields" multiple>
+                @foreach ($fields as $field)
+                    <option class="text-white" value="{{ $field->id }}">{{ $field->label }}</option>
+                @endforeach
+            </select>
         </div>
 
         <div class="flex items-center justify-end mt-4">

@@ -4,15 +4,23 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Form extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'title', 'description'
-    ];
-    public function document_type(): \Illuminate\Database\Eloquent\Relations\HasMany
+    protected $fillable = ['title', 'description'];
+    public function fields(): BelongsToMany
     {
-        return $this->hasMany(Document_type::class);
+        return $this->belongsToMany(Field::class, 'form_fields');
+    }
+    public function documentTypes(): HasMany
+    {
+        return $this->hasMany(DocumentType::class);
+    }
+    public function clients(): BelongsToMany
+    {
+        return $this->belongsToMany(Client::class, 'filled_forms');
     }
 }

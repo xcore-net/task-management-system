@@ -15,23 +15,38 @@
                     </x-nav-link>
                 </div>
                 <div class=" w-full">
-                    <table class="w-full table-auto text-left">
+                    <table class="text-white w-full table-auto text-left">
                         <thead>
                             <tr class="text-left">
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Label</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Document Types</th>
+                                <th>Filled Forms</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($clients as $client)
+                            @forelse ($clients as $client)`
                             <tr>
                                 <td>{{ $client->id }}</td>
                                 <td>{{ $client->name }}</td>
-                                <td>{{ $client->label }}</td>
+                                <td>{{ $client->email }}</td>
+                                <td>{{ $client->phone }}</td>
+                                <td><select>
+                                     @foreach ($client->documentTypes as $documentType)
+                                     <option value="{{ $documentType->id }}">{{ $documentType->label }}</option>
+                                      @endforeach
+                                    </select></td>
+                                <td><select>
+                                     @foreach ($client->forms as $form)
+                                     <option value="{{ $form->id }}">{{ $form->title }}</option>
+                                      @endforeach
+                                    </select></td>
+                                    
                                 <td>{{ $client->created_at }}</td>
                                 <td>{{ $client->updated_at }}</td>
                                 <td>
@@ -52,7 +67,7 @@
 
                             @empty
                             <tr>
-                                <td>no clients</td>
+                                <td>No clients</td>
                             </tr>
                             @endforelse
 
@@ -64,6 +79,4 @@
 
                 </div>
             </div>
-        </div>
-    </div>
 </x-app-layout>

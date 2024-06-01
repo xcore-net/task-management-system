@@ -2,63 +2,54 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Field;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\View\View;
 
+use App\Models\Field;
 
 class FieldController extends Controller
 {
-    public function index(): View
+    public function index()
     {
-        $field = Field::all();
-
-        return view('field.index', ['fields' => $field]);
+        $fields = Field::all();
+        return view("field.index", ["fields" => $fields]);
     }
 
     public function create(): View
     {
         return view('field.create');
     }
-    public function store(Request $request): RedirectResponse
+
+    public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'label' => ['required', 'string', 'max:255'],
-        ]);
-
-        Field::create([
-            'name' => $request->name,
-            'label' => $request->label,
-        ]);
-
-        return redirect(route('field.index', absolute: false));
+        $field = new Field();
+        $field->name = $request->name;
+        $field->label = $request->label;
+        $field->save(); //save
     }
-
     public function show(string $id): View
     {
         $field = Field::findOrFail($id);
 
-        return view('field.show', [
-            'field' => $field,
-        ]);
-    }
-
+        return view('$field.show', [
+            '$field' => $field,
+        ]);}
     public function edit(string $id): View
     {
-        $field = Field::findOrFail($id);
+        $field = field::findOrFail($id);
         return view('field.create', [
             'field' => $field,
         ]);
     }
+
     public function update(Request $request, string $id): RedirectResponse
     {
         $field = Field::findOrFail($id);
 
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'label' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:100'],
+            'label' => ['required', 'string', 'max:100'],
         ]);
 
         $field->update([
@@ -77,3 +68,4 @@ class FieldController extends Controller
         return redirect(route('field.index', absolute: false))->with('success', 'Field deleted successfully');
     }
 }
+

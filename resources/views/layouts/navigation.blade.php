@@ -19,6 +19,7 @@
                     <x-nav-link :href="route('form.index')" :active="request()->routeIs('form.index')">
                         {{ __('Form') }}
                     </x-nav-link>
+<<<<<<< HEAD
                     <x-nav-link :href="route('field.index')" :active="request()->routeIs('field.index')">
                         {{ __('Field') }}
                     </x-nav-link>
@@ -28,6 +29,8 @@
                     <x-nav-link :href="route('document_request.index')" :active="request()->routeIs('document_request.index')">
                         {{ __('Requests') }}
                     </x-nav-link>
+=======
+>>>>>>> 8d60460840921b52980388e8478f68ed99ebb1ee
                 </div>
 
             </div>

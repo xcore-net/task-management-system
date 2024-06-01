@@ -15,12 +15,13 @@
                     </x-nav-link>
                 </div>
                 <div class=" w-full">
-                    <table class="w-full table-auto text-left">
+                    <table class="text-white w-full table-auto text-left">
                         <thead>
                             <tr class="text-left">
                                 <th>ID</th>
                                 <th>Title</th>
                                 <th>Description</th>
+                                <th>Fields</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
@@ -32,6 +33,12 @@
                                 <td>{{ $form->id }}</td>
                                 <td>{{ $form->title }}</td>
                                 <td>{{ $form->description }}</td>
+                                <td><select>
+                                     @foreach ($form->fields as $field)
+                                     <option value="{{ $field->id }}">{{ $field->label }}</option>
+                                      @endforeach
+                                    </select></td>
+                                    
                                 <td>{{ $form->created_at }}</td>
                                 <td>{{ $form->updated_at }}</td>
                                 <td>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Field') }}
+            {{ __('Task Type') }}
         </h2>
     </x-slot>
 
@@ -9,40 +9,45 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("This is Field Page!") }}
-                    <x-nav-link :href="route('field.create')">
+                    {{ __("This is taskType Page!") }}
+                    <x-nav-link :href="route('taskType.create')">
                         {{ __('Create') }}
                     </x-nav-link>
                 </div>
                 <div class=" w-full">
-                    <table class="w-full table-auto text-left text-white">
+                    <table class="text-white w-full table-auto text-left">
                         <thead>
                             <tr class="text-left">
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Label</th>
+                                <th>Assignees</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($fields as $field)
+                            @forelse ($taskTypes as $taskType)`
                             <tr>
-                                <td>{{ $field->id }}</td>
-                                <td>{{ $field->name }}</td>
-                                <td>{{ $field->label }}</td>
-                                <td>{{ $field->created_at }}</td>
-                                <td>{{ $field->updated_at }}</td>
+                                <td>{{ $taskType->id }}</td>
+                                <td>{{ $taskType->name }}</td>
+                                <td><select id="um-hassan">
+                                        @foreach ($taskType->assignees as $assignee)
+                                        <option value="{{ $assignee->id }}">{{ $assignee->id }}</option>
+                                        @endforeach
+                                    </select></td>
+
+                                <td>{{ $taskType->created_at }}</td>
+                                <td>{{ $taskType->updated_at }}</td>
                                 <td>
-                                    <a href="{{ url('/field/' . $field->id) }}" class="btn btn-xs btn-info pull-right">View</a>
-                                    <a href="{{ url('/field/' . $field->id . '/edit') }}" class="btn btn-xs btn-info pull-right">Edit</a>
+                                    <a href="{{ url('/taskType/' . $taskType->id) }}" class="btn btn-xs btn-info pull-right">View</a>
+                                    <a href="{{ url('/taskType/' . $taskType->id . '/edit') }}" class="btn btn-xs btn-info pull-right">Edit</a>
                                     <!-- Delete Button -->
 
-                                    <form method="POST" action="{{ route('field.destroy', $field->id) }}">
+                                    <form method="POST" action="{{ route('taskType.destroy', $taskType->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this form?');">
+                                        <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this taskType?');">
                                             {{ __('Delete') }}
                                         </x-danger-button>
                                     </form>
@@ -52,16 +57,12 @@
 
                             @empty
                             <tr>
-                                <td>no field</td>
+                                <td>No taskTypes</td>
                             </tr>
                             @endforelse
 
-
                         </tbody>
                     </table>
-
-
-
                 </div>
             </div>
 </x-app-layout>

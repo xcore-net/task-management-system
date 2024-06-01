@@ -9,15 +9,15 @@
 
         <!-- Name -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name', isset($field) ? $field->name : '')" required autofocus autocomplete="name" />
+            <x-input-label for="field-name" :value="__('Name')" />
+            <x-text-input id="field-name" class="block mt-1 w-full" type="text" name="name" :value="old('name', isset($field) ? $field->name : '')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
-        <!-- Description -->
+        <!-- Label -->
         <div>
-            <x-input-label for="label" :value="__('Label')" />
-            <x-text-input id="label" class="block mt-1 w-full" type="text" name="label" :value="old('label', isset($field) ? $field->label : '')" required autocomplete="label" />
+            <x-input-label for="field-label" :value="__('Label')" />
+            <x-text-input id="field-label" class="block mt-1 w-full" type="text" name="label" :value="old('label', isset($field) ? $field->label : '')" required autocomplete="label" />
             <x-input-error :messages="$errors->get('label')" class="mt-2" />
         </div>
 
@@ -32,7 +32,7 @@
     <form method="POST" action="{{ route('field.destroy', $field->id) }}">
         @csrf
         @method('DELETE')
-        <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this form?');">
+        <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this field?');">
             {{ __('Delete') }}
         </x-danger-button>
     </form>
