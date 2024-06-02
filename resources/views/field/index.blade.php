@@ -21,6 +21,8 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Label</th>
+                                <th>User ID</th>
+                                <th>Last Updated By</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
@@ -32,6 +34,8 @@
                                 <td>{{ $field->id }}</td>
                                 <td>{{ $field->name }}</td>
                                 <td>{{ $field->label }}</td>
+                                <td>{{ $field->user_id }}</td>
+                                <td>{{ $field->last_updated_by }}</td>
                                 <td>{{ $field->created_at }}</td>
                                 <td>{{ $field->updated_at }}</td>
                                 <td>

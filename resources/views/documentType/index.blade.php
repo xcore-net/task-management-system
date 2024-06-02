@@ -21,6 +21,8 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Form id</th>
+                                <th>User ID</th>
+                                <th>Last Updated By</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
@@ -32,6 +34,8 @@
                                 <td>{{ $documentType->id }}</td>
                                 <td>{{ $documentType->name }}</td>
                                 <td>{{ $documentType->form_id }}</td>
+                                <td>{{ $documentType->user_id }}</td>
+                                <td>{{ $documentType->last_updated_by }}</td>
                                 <td>{{ $documentType->created_at }}</td>
                                 <td>{{ $documentType->updated_at }}</td>
                                 <td>

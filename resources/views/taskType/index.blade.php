@@ -21,6 +21,8 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Assignees</th>
+                                <th>User ID</th>
+                                <th>Last Updated By</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
@@ -31,6 +33,8 @@
                             <tr>
                                 <td>{{ $taskType->id }}</td>
                                 <td>{{ $taskType->name }}</td>
+                                <td>{{ $taskType->user_id }}</td>
+                                <td>{{ $taskType->last_updated_by }}</td>
                                 <td><select id="um-hassan">
                                         @foreach ($taskType->assignees as $assignee)
                                         <option value="{{ $assignee->id }}">{{ $assignee->id }}</option>

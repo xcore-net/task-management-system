@@ -20,6 +20,7 @@
                             <tr class="text-left">
                                 <th>ID</th>
                                 <th>User ID</th>
+                                <th>Last Updated By</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
@@ -30,6 +31,7 @@
                             <tr>
                                 <td>{{ $assignee->id }}</td>
                                 <td>{{ $assignee->user_id }}</td>
+                                <td>{{ $assignee->last_updated_by }}</td>
                                 <td>{{ $assignee->created_at }}</td>
                                 <td>{{ $assignee->updated_at }}</td>
                                 <td>
