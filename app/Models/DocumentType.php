@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class DocumentType extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'form_id'];
+    protected $fillable = ['name', 'form_id','user_id','last_updated_by'];
     public function clients(): BelongsToMany
     {
         return $this->belongsToMany(Client::class, 'document_requests');

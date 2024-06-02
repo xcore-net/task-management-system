@@ -9,7 +9,7 @@ class Field extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'label'
+        'name', 'label','user_id','last_updated_by'
     ];
     public function forms(){
 

@@ -12,7 +12,7 @@ class Assignee extends Model
 
     use HasFactory;
     protected $fillable = [
-        'user_id'
+        'user_id','last_updated_by'
     ];
     public function users(): BelongsTo
     {

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 class TaskType extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name','user_id','last_updated_by'];
     public function assignees(): BelongsToMany
     {
         return $this->belongsToMany(Assignee::class, 'assignees_task_types');
