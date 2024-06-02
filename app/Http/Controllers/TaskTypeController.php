@@ -36,12 +36,16 @@ class TaskTypeController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'assignees' => ['required', 'array']
+            'assignees' => ['required', 'array'],
+            'user_id' => ['required', 'integer'],
+            'last_updated_by' => ['required','string'],
         ]);
 
         $taskTypes = TaskType::create([
             'name' => $request->name,
-            'assignees' => $request->assignees
+            'assignees' => $request->assignees,
+            'user_id' => auth()->user()->id,
+            'last_updated_by'=>auth()->user()->name
         ]);
 
         $taskTypes->assignees()->sync($request->assignees);
@@ -71,12 +75,16 @@ class TaskTypeController extends Controller
         $taskTypes = TaskType::findOrFail($id);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'assignees' => ['required', 'array']
+            'assignees' => ['required', 'array'],
+            'user_id' => ['required', 'integer'],
+            'last_updated_by' => ['required','string'],
         ]);
         $taskTypes->assignees()->sync($request->assignees);
         $taskTypes->update([
             'name' => $request->name,
-            'assignees' =>  $request->assignees,
+            'assignees' =>  $request->assignees,,
+            'user_id' => auth()->user()->id,
+            'last_updated_by'=>auth()->user()->name
         ]);
         $taskTypes->assignees()->sync($request->assignees);
 

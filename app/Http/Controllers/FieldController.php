@@ -24,9 +24,20 @@ class FieldController extends Controller
     public function store(Request $request)
     {
         $field = new Field();
-        $field->name = $request->name;
-        $field->label = $request->label;
-        $field->save(); //save
+        $request->validate([
+            'name' => ['required', 'string', 'max:100'],
+            'label' => ['required', 'integer'],
+            'user_id' => ['required', 'integer'],
+            'last_updated_by' => ['required','string'],
+        ]);
+
+        $field::create([
+            'name' => $request->name,
+            'label' => $request->label,
+            'user_id' => auth()->user()->id,
+            'last_updated_by'=>auth()->user()->name
+        ]);
+        
     }
     public function show(string $id): View
     {
@@ -49,12 +60,16 @@ class FieldController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'label' => ['required', 'string', 'max:100'],
+            'label' => ['required', 'integer'],
+            'user_id' => ['required', 'integer'],
+            'last_updated_by' => ['required','string'],
         ]);
 
-        $field->update([
+        $field::update([
             'name' => $request->name,
             'label' => $request->label,
+            'user_id' => auth()->user()->id,
+            'last_updated_by'=>auth()->user()->name
         ]);
 
         return redirect(route('field.index', absolute: false));

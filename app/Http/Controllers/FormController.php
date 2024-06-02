@@ -35,13 +35,17 @@ class FormController extends Controller
     {
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255'],,
+            'user_id' => ['required', 'integer'],
+            'last_updated_by' => ['required','string'],
         ]);
 
         $form = Form::create([
             
             'title' => $request->title,
-            'description' => $request->description,
+            'description' => $request->description,,
+            'user_id' => auth()->user()->id,
+            'last_updated_by'=>auth()->user()->name
         ]);
         
         $form->fields()->sync($request->fields);
@@ -73,12 +77,16 @@ class FormController extends Controller
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
-            'fields'=>['required','array']
+            'fields'=>['required','array'],
+            'user_id' => ['required', 'integer'],
+            'last_updated_by' => ['required','string'],
         ]);
 
         $form->update([
             'title' => $request->title,
-            'description' => $request->description,
+            'description' => $request->description,,
+            'user_id' => auth()->user()->id,
+            'last_updated_by'=>auth()->user()->name
         ]);
         $form->fields()->sync($request->fields);
 

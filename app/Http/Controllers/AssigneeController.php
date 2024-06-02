@@ -27,11 +27,13 @@ class AssigneeController extends Controller
     {
         $assignee = new Assignee();
         $request->validate([
-            'user_id' => ['required', 'integer']
+            'user_id' => ['required', 'integer'],
+            'last_updated_by' => ['required','string'],
         ]);
 
         $assignee::create([
-            'user_id' => $request->user_id
+            'user_id' => $request->user_id,
+            'last_updated_by'=>auth()->user()->name
         ]);
         return redirect(route('assignee.index', absolute: false));
     }
@@ -59,11 +61,13 @@ class AssigneeController extends Controller
         $assignee = Assignee::findOrFail($id);
 
         $request->validate([
-            'user_id' => ['required', 'integer']
+            'user_id' => ['required', 'integer'],
+            'last_updated_by' => ['required','string'],
         ]);
 
         $assignee->update([
-            'user_id' => $request->user_id
+            'user_id' => $request->user_id,
+            'last_updated_by'=>auth()->user()->name
         ]);
         
         return redirect(route('assignee.index', absolute: false));

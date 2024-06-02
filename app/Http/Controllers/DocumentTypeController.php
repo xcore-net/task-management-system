@@ -28,12 +28,16 @@ class DocumentTypeController extends Controller
         $documentType = new DocumentType();
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'form_id' => ['required', 'integer']
+            'form_id' => ['required', 'integer'],
+            'user_id' => ['required', 'integer'],
+            'last_updated_by' => ['required','string'],
         ]);
 
         $documentType::create([
             'name' => $request->name,
-            'form_id' => $request->form_id
+            'form_id' => $request->form_id,
+            'user_id' => auth()->user()->id,
+            'last_updated_by'=>auth()->user()->name
         ]);
         return redirect(route('documentType.index', absolute: false));
     }
@@ -62,12 +66,16 @@ class DocumentTypeController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'form_id' => ['required', 'integer']
+            'form_id' => ['required', 'integer'],
+            'user_id' => ['required', 'integer'],
+            'last_updated_by' => ['required','string'],
         ]);
 
         $documentType->update([
             'name' => $request->name,
-            'form_id' => $request->form_id
+            'form_id' => $request->form_id,
+            'user_id' => auth()->user()->id,
+            'last_updated_by'=>auth()->user()->name
         ]);
 
         return redirect(route('documentType.index', absolute: false));
