@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreign('field_id')->references('id')->on('fields');
 
             $table->integer('user_id');
+            $table->string('last_updated_by');
             $table->timestamps();
         });
     }
