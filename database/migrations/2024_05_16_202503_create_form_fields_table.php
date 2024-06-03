@@ -20,8 +20,6 @@ return new class extends Migration
             $table->unsignedBigInteger('field_id');
             $table->foreign('field_id')->references('id')->on('fields');
 
-            $table->integer('user_id');
-            $table->string('last_updated_by');
             $table->timestamps();
         });
     }

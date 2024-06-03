@@ -21,9 +21,9 @@
                                 <th>ID</th>
                                 <th>Title</th>
                                 <th>Description</th>
-                                <th>Fields</th>
                                 <th>User ID</th>
                                 <th>Last Updated By</th>
+                                <th>Fields</th>
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
@@ -35,7 +35,7 @@
                                 <td>{{ $form->id }}</td>
                                 <td>{{ $form->title }}</td>
                                 <td>{{ $form->description }}</td>
-                                <td>{{ $from->user_id }}</td>
+                                <td>{{ $form->user_id }}</td>
                                 <td>{{ $form->last_updated_by }}</td>
                                 <td><select>
                                      @foreach ($form->fields as $field)

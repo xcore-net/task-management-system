@@ -21,7 +21,7 @@ class Client extends Model
     {
         return $this->belongsToMany(Form::class,'filled_forms');
     }
-    public function uploded_files(): HasMany{
+    public function uploaded_files(): HasMany{
         return $this->hasMany(UploadedFiles::class);
     }
 }

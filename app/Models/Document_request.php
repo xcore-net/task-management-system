@@ -4,18 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use MongoDB\BSON\Document;
 
 class Document_request extends Model
 {
     use HasFactory;
     protected $fillable = ['client_id','document_id'];
-    public function client(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function clients(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(clients::class);
+        return $this->belongsTo(Client::class);
     }
-    public function document_type(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function document_types(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Document_type::class);
+        return $this->belongsTo(DocumentType::class);
     }
 }
