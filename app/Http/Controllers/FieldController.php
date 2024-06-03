@@ -21,23 +21,23 @@ class FieldController extends Controller
         return view('field.create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $field = new Field();
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'label' => ['required', 'string'],
-            'user_id' => ['required', 'integer'],
-            'last_updated_by' => ['required','string'],
+            'label' => ['required', 'string', 'max:100'],
         ]);
 
-        $field::create([
+        $field = Field::create([
             'name' => $request->name,
             'label' => $request->label,
             'user_id' => auth()->user()->id,
-            'last_updated_by'=>auth()->user()->name
+            'last_updated_by' => auth()->user()->name
         ]);
-        
+
+
+
+        return redirect(route('field.index', absolute: false));
     }
     public function show(string $id): View
     {
@@ -45,7 +45,8 @@ class FieldController extends Controller
 
         return view('$field.show', [
             '$field' => $field,
-        ]);}
+        ]);
+    }
     public function edit(string $id): View
     {
         $field = field::findOrFail($id);
@@ -60,16 +61,16 @@ class FieldController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'label' => ['required', 'string'],
+            'label' => ['required', 'string', 'max:100'],
             'user_id' => ['required', 'integer'],
-            'last_updated_by' => ['required','string'],
+            'last_updated_by' => ['required', 'string'],
         ]);
 
         $field::update([
             'name' => $request->name,
             'label' => $request->label,
             'user_id' => auth()->user()->id,
-            'last_updated_by'=>auth()->user()->name
+            'last_updated_by' => auth()->user()->name
         ]);
 
         return redirect(route('field.index', absolute: false));
@@ -83,4 +84,3 @@ class FieldController extends Controller
         return redirect(route('field.index', absolute: false))->with('success', 'Field deleted successfully');
     }
 }
-

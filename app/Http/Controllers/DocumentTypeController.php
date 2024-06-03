@@ -29,8 +29,6 @@ class DocumentTypeController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'form_id' => ['required', 'integer'],
-            'user_id' => ['required', 'integer'],
-            'last_updated_by' => ['required','string'],
         ]);
 
         $documentType::create([
@@ -67,8 +65,6 @@ class DocumentTypeController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'form_id' => ['required', 'integer'],
-            'user_id' => ['required', 'integer'],
-            'last_updated_by' => ['required','string'],
         ]);
 
         $documentType->update([

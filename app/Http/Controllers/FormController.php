@@ -35,9 +35,7 @@ class FormController extends Controller
     {
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
-            'user_id' => ['required', 'integer'],
-            'last_updated_by' => ['required','string'],
+            'description' => ['required', 'string', 'max:255']
         ]);
 
         $form = Form::create([
@@ -78,8 +76,6 @@ class FormController extends Controller
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
             'fields'=>['required','array'],
-            'user_id' => ['required', 'integer'],
-            'last_updated_by' => ['required','string'],
         ]);
 
         $form->update([

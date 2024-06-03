@@ -20,20 +20,16 @@ class AssigneeController extends Controller
     public function create(): View
     {
         $users = User::all();
-        return view('assignee.create',['users'=>$users]);
+        return view('assignee.create', ['users' => $users]);
     }
 
     public function store(Request $request): RedirectResponse
     {
         $assignee = new Assignee();
-        $request->validate([
-            'user_id' => ['required', 'integer'],
-            'last_updated_by' => ['required','string'],
-        ]);
 
         $assignee::create([
             'user_id' => $request->user_id,
-            'last_updated_by'=>auth()->user()->name
+            'last_updated_by' => auth()->user()->name
         ]);
         return redirect(route('assignee.index', absolute: false));
     }
@@ -52,7 +48,7 @@ class AssigneeController extends Controller
         $assignee = Assignee::findOrFail($id);
         $users = User::all();
         return view('assignee.create', [
-            'assignee' => $assignee,'users'=>$users
+            'assignee' => $assignee, 'users' => $users
         ]);
     }
 
@@ -60,16 +56,12 @@ class AssigneeController extends Controller
     {
         $assignee = Assignee::findOrFail($id);
 
-        $request->validate([
-            'user_id' => ['required', 'integer'],
-            'last_updated_by' => ['required','string'],
-        ]);
 
         $assignee->update([
             'user_id' => $request->user_id,
-            'last_updated_by'=>auth()->user()->name
+            'last_updated_by' => auth()->user()->name
         ]);
-        
+
         return redirect(route('assignee.index', absolute: false));
     }
 

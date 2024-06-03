@@ -10,7 +10,7 @@
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("This is Uploded_files Page!") }}
-                    <x-nav-link :href="route('uploded_files.create')">
+                    <x-nav-link :href="route('uploaded_files.create')">
                         {{ __('Create') }}
                     </x-nav-link>
                 </div>
@@ -27,19 +27,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($uploded_filess as $uploded_files)
+                            @forelse ($uploadedFiles as $uploadedFile)
                             <tr>
-                                <td>{{ $uploded_files->id }}</td>
-                                <td>{{ $uploded_files->client_id }}</td>
-                                <td>{{ $uploded_files->filled_form_id }}</td>
-                                <td>{{ $uploded_files->created_at }}</td>
-                                <td>{{ $uploded_files->updated_at }}</td>
+                                <td>{{ $uploadedFile->id }}</td>
+                                <td>{{ $uploadedFile->client_id }}</td>
+                                <td>{{ $uploadedFile->filled_form_id }}</td>
+                                <td>{{ $uploadedFile->created_at }}</td>
+                                <td>{{ $uploadedFile->updated_at }}</td>
                                 <td>
-                                    <a href="{{ url('/uploded_files/' . $uploded_files->id) }}" class="btn btn-xs btn-info pull-right">View</a>
-                                    <a href="{{ url('/uploded_files/' . $uploded_files->id . '/edit') }}" class="btn btn-xs btn-info pull-right">Edit</a>
+                                    <a href="{{ url('/uploded_files/' . $uploadedFile->id) }}" class="btn btn-xs btn-info pull-right">View</a>
+                                    <a href="{{ url('/uploded_files/' . $uploadedFile->id . '/edit') }}" class="btn btn-xs btn-info pull-right">Edit</a>
                                     <!-- Delete Button -->
 
-                                    <form method="POST" action="{{ route('uploded_files.destroy', $uploded_files->id) }}">
+                                    <form method="POST" action="{{ route('uploded_files.destroy', $uploadedFile->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this form?');">
