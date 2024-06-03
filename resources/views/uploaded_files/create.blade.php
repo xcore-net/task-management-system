@@ -1,5 +1,5 @@
 <x-app-layout>
-    <form method="POST" action="{{ isset($uploaded_file) ? route('uploaded_file.update', $uploaded_file->id) : route('uploaded_file.store') }}">
+    <form method="POST" action="{{ isset($uploaded_file) ? route('uploaded_files.update', $uploaded_file->id) : route('uploaded_files.store') }}">
         @csrf
 
         <!-- If editing, add method spoofing -->
@@ -7,7 +7,7 @@
         @method('PUT')
         @endif
 
-        <!-- CLient ID -->
+        <!-- Client ID -->
         <div>
             <x-input-label for="uploaded_file-client_id" :value="__('Client ID')" />
             <x-text-input id="uploaded_file-client id" class="block mt-1 w-full" type="text" name="name" :value="old('name', isset($uploaded_file) ? $uploaded_file->client_id : '')" required autofocus autocomplete="client_id" />
@@ -29,7 +29,7 @@
     </form>
     <!-- Delete Button -->
     @if(isset($uploaded_file))
-    <form method="POST" action="{{ route('uploaded_file.destroy', $uploaded_file->id) }}">
+    <form method="POST" action="{{ route('uploaded_files.destroy', $uploaded_file->id) }}">
         @csrf
         @method('DELETE')
         <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this uploaded_file?');">

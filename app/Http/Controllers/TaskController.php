@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Assignee;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\TaskType;
+use App\Models\Client;
+use App\Models\Document_request;
+
+
+
 
 class TaskController extends Controller
 {
@@ -18,7 +25,19 @@ class TaskController extends Controller
 
     public function create(): View
     {
-        return view('task.create');
+        $tasks = Task::all();
+        $taskTypes = TaskType::all();
+        $clients = Client::all();
+        $assignees = Assignee::all();
+        $documentRequests = Document_request::all();
+        
+        return view('task.create',[
+            "tasks" => $tasks,
+            "taskTypes" => $taskTypes,
+            "clients" => $clients,
+            "assignees" => $assignees,
+            "documentRequests"=> $documentRequests
+        ]);
     }
 
     public function store(Request $request)

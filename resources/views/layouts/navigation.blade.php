@@ -28,7 +28,7 @@
                     <x-nav-link :href="route('document_request.index')" :active="request()->routeIs('document_request.index')">
                         {{ __('Requests') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('document_request.index')" :active="request()->routeIs('document_request.index')">
+                    <x-nav-link :href="route('document_request.index')" :active="request()->routeIs('uploaded_files.index')">
                         {{ __('Uploded Files') }}
                     </x-nav-link>
                     <x-nav-link :href="route('task.index')" :active="request()->routeIs('task.index')">
