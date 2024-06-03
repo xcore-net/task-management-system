@@ -26,7 +26,7 @@ class FieldController extends Controller
         $field = new Field();
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'label' => ['required', 'integer'],
+            'label' => ['required', 'string'],
             'user_id' => ['required', 'integer'],
             'last_updated_by' => ['required','string'],
         ]);
@@ -60,7 +60,7 @@ class FieldController extends Controller
 
         $request->validate([
             'name' => ['required', 'string', 'max:100'],
-            'label' => ['required', 'integer'],
+            'label' => ['required', 'string'],
             'user_id' => ['required', 'integer'],
             'last_updated_by' => ['required','string'],
         ]);

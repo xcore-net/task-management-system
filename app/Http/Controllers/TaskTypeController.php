@@ -82,7 +82,7 @@ class TaskTypeController extends Controller
         $taskTypes->assignees()->sync($request->assignees);
         $taskTypes->update([
             'name' => $request->name,
-            'assignees' =>  $request->assignees,,
+            'assignees' =>  $request->assignees,
             'user_id' => auth()->user()->id,
             'last_updated_by'=>auth()->user()->name
         ]);
