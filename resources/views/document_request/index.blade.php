@@ -39,7 +39,7 @@
                                     <a href="{{ url('/document_request/' . $document_request->id . '/edit') }}" class="btn btn-xs btn-info pull-right">Edit</a>
                                     <!-- Delete Button -->
 
-                                    <form method="POST" action="{{ route('document_request.destroy', $form->id) }}">
+                                    <form method="POST" action="{{ route('document_request.destroy', $document_request->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this document request?');">

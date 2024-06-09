@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Form;
 use App\Models\Field;
+use Illuminate\Support\Facades\Gate;
 
 class FormController extends Controller
 {
@@ -72,6 +73,10 @@ class FormController extends Controller
     public function update(Request $request, string $id): RedirectResponse
     {
         $form = Form::findOrFail($id);
+
+        if (! Gate::allows('update-form', $form)) {
+            abort(403);
+        }
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],

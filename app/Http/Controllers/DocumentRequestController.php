@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Document_request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\View\View;
 
 class DocumentRequestController extends Controller
@@ -56,7 +57,9 @@ class DocumentRequestController extends Controller
     public function update(Request $request, string $id): RedirectResponse
     {
         $document_request = Document_request::findOrFail($id);
-
+        if (! Gate::allows('alter-request', $document_request)) {
+            abort(403);
+        }
         $request->validate([
             'client_id' => ['required', 'integer', ],
             'document_type_id' => ['required','integer'],
@@ -75,6 +78,9 @@ class DocumentRequestController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         $document_request = Document_request::findOrFail($id);
+        if (! Gate::allows('alter-request', $document_request)) {
+            abort(403);
+        }
         $document_request->delete();
 
         return redirect(route('document_request.index', absolute: false))->with('success', 'Document_Request deleted successfully');

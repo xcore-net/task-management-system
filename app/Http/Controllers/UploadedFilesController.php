@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
-use App\Models\Uploadedfiles;
+use App\Models\UploadedFiles;
 
-class UploadedfilesController extends Controller
+class UploadedFilesController extends Controller
 {
     public function index()
     {
-        $uploadedFiles = Uploadedfiles::all();
+        $uploadedFiles = UploadedFiles::all();
         return view("uploaded_files.index", ["uploadedFiles" => $uploadedFiles]);
     }
 
@@ -23,21 +24,21 @@ class UploadedfilesController extends Controller
 
     public function store(Request $request)
     {
-        $uploadedFiles = new Uploadedfiles();
+        $uploadedFiles = new UploadedFiles();
         $uploadedFiles->client_id = $request->client_id;
         $uploadedFiles->filled_form_id = $request->filled_form_id;
         $uploadedFiles->save(); //save
     }
     public function show(string $id): View
     {
-        $uploadedFiles = Uploadedfiles::findOrFail($id);
+        $uploadedFiles = UploadedFiles::findOrFail($id);
 
         return view('uploaded_files.show', [
             'uploadedFiles' => $uploadedFiles,
         ]);}
     public function edit(string $id): View
     {
-        $uploadedFiles = uploadedfiles::findOrFail($id);
+        $uploadedFiles = UploadedFiles::findOrFail($id);
         return view('uploaded_files.create', [
             'uploadedFiles' => $uploadedFiles,
         ]);
@@ -45,7 +46,11 @@ class UploadedfilesController extends Controller
 
     public function update(Request $request, string $id): RedirectResponse
     {
-        $uploadedFile = Uploadedfiles::findOrFail($id);
+        $uploadedFile = UploadedFiles::findOrFail($id);
+
+        if (! Gate::allows('alter-uploadedFiles', $uploadedFile)) {
+            abort(403);
+        }
 
         $request->validate([
             'client_id' => ['required'],
@@ -62,7 +67,10 @@ class UploadedfilesController extends Controller
 
     public function destroy(string $id): RedirectResponse
     {
-        $uploadedFiles = Uploadedfiles::findOrFail($id);
+        $uploadedFiles = UploadedFiles::findOrFail($id);
+        if (! Gate::allows('alter-form', $uploadedFiles)) {
+            abort(403);
+        }
         $uploadedFiles->delete();
 
         return redirect(route('uploaded_files.index', absolute: false))->with('success', 'Uploadedfiles deleted successfully');
