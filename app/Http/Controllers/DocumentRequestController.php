@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Document_request;
+use App\Models\DocumentType;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
@@ -19,7 +21,9 @@ class DocumentRequestController extends Controller
 
     public function create(): View
     {
-        return view('document_request.create');
+        $documentTypes = DocumentType::all();
+        $clients = Client::all();
+        return view('document_request.create',['documentTypes'=>$documentTypes,'clients'=>$clients]);
     }
     public function store(Request $request): RedirectResponse
     {
@@ -28,15 +32,14 @@ class DocumentRequestController extends Controller
             'document_type_id' => ['required','integer'],
         ]);
 
-        Document_request::create([
+        $doc = Document_request::create([
             'client_id' => $request->client_id,
             'document_type_id' => $request->document_type_id,
-
         ]);
 
         return redirect(route('document_request.index', absolute: false));
     }
-    public function show($docReqId): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+    public function show($docReqId): View
     {
         $docReq = Document_request::with('document_requests', 'docTypes')->find($docReqId);
 
@@ -50,8 +53,10 @@ class DocumentRequestController extends Controller
     public function edit(string $id): View
     {
         $document_request = Document_request::findOrFail($id);
+        $documentTypes=DocumentType::all();
+        $clients=Client::all();
         return view('document_request.create', [
-            'document_request' => $document_request,
+            'document_request' => $document_request,'documentTypes'=>$documentTypes,'clients'=>$clients
         ]);
     }
     public function update(Request $request, string $id): RedirectResponse

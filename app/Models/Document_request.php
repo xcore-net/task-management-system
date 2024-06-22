@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Document_request extends Model
 {
     use HasFactory;
-    protected $fillable = ['client_id','document_id'];
+    protected $fillable = ['client_id','document_type_id'];
     public function clients(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Client::class);
