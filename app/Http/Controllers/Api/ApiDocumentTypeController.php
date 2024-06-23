@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Models\DocumentType;
@@ -25,8 +26,8 @@ class ApiDocumentTypeController extends Controller
         $documentType::create([
             'name' => $request->name,
             'form_id' => $request->form_id,
-            'user_id' => auth()->user()->id,
-            'last_updated_by' => auth()->user()->name
+            'user_id'=> $request->user_id,
+            "last_updated_by"=> $request->last_updated_by
         ]);
         return response()->json(['message' => 'Document type Created!'])->setStatusCode(201);
     }
@@ -50,8 +51,8 @@ class ApiDocumentTypeController extends Controller
         $documentType->update([
             'name' => $request->name,
             'form_id' => $request->form_id,
-            'user_id' => auth()->user()->id,
-            'last_updated_by' => auth()->user()->name
+             'user_id'=> $request->user_id,
+            "last_updated_by"=> $request->last_updated_by
         ]);
 
         return response()->json(['message' => 'Document type Created!'])->setStatusCode(200);

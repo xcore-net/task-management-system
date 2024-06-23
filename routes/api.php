@@ -5,7 +5,7 @@ use App\Http\Controllers\Api\ApiFormController;
 use App\Http\Controllers\Api\ApiTaskController;
 use App\Http\Controllers\Api\ApiTaskTypeController;
 use App\Http\Controllers\Api\ApiUploadedFilesController;
-use App\Http\Controllers\ApiDocumentTypeController;
+use App\Http\Controllers\Api\ApiDocumentTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,11 +42,11 @@ Route::put('/task/{id}', [ApiTaskController::class, 'update'])->name('task.updat
 Route::delete('/task/{id}', [ApiTaskController::class, 'destroy'])->name('task.destroy');
 
 //Doc request
-Route::get('/document_request', [ApiDocumentRequestController::class, 'index'])->name('document_request.index');
-Route::post('/document_request/store', [ApiDocumentRequestController::class, 'store'])->name('document_request.store');
-Route::get('/document_request/{id}', [ApiDocumentRequestController::class, 'show'])->name('document_request.show');
-Route::put('/document_request/{id}', [ApiDocumentRequestController::class, 'update'])->name('document_request.update');
-Route::delete('/document_request/{id}', [ApiDocumentRequestController::class, 'destroy'])->name('document_request.destroy');
+Route::get('/document_request', [ApiDocumentRequestController::class, 'index']);
+Route::post('/document_request/store', [ApiDocumentRequestController::class, 'store']);
+Route::get('/document_request/{id}', [ApiDocumentRequestController::class, 'show']);
+Route::put('/document_request/{id}', [ApiDocumentRequestController::class, 'update']);
+Route::delete('/document_request/{id}', [ApiDocumentRequestController::class, 'destroy']);
 
 //Doc types
 Route::get('/documentType', [ApiDocumentTypeController::class, 'index'])->name('documentType.index');
