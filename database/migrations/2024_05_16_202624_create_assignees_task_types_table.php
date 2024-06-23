@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('assignee_id');
             $table->foreign('assignee_id')->references('id')->on('assignees');
             
+            $table->integer('user_id')->nullable();
             $table->timestamps();
         });
     }

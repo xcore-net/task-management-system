@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
+            $table->integer('user_id');
+            $table->string('last_updated_by');
 
             $table->timestamps();
         });

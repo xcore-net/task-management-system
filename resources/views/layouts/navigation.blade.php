@@ -10,6 +10,7 @@
                     </a>
                 </div>
 
+
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
@@ -18,7 +19,24 @@
                     <x-nav-link :href="route('form.index')" :active="request()->routeIs('form.index')">
                         {{ __('Form') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('field.index')" :active="request()->routeIs('field.index')">
+                        {{ __('Field') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('client.index')" :active="request()->routeIs('client.index')">
+                        {{ __('Client') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('document_request.index')" :active="request()->routeIs('document_request.index')">
+                        {{ __('Requests') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('uploaded_files.index')" :active="request()->routeIs('uploaded_files.index')">
+                        {{ __('Uploded Files') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('task.index')" :active="request()->routeIs('task.index')">
+                        {{ __('Task') }}
+                    </x-nav-link>
+
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->

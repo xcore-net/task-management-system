@@ -7,22 +7,25 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Form;
+use App\Models\Field;
+use Illuminate\Support\Facades\Gate;
 
 class FormController extends Controller
 {
 
     public function index(): View
     {
-        $forms = Form::all();
+        $forms = Form::with('fields')->get();
 
-        return view('form.index', ["forms" => $forms]);
+        return view('Form.index', compact('forms'));
     }
     /**
      * Display the create form view.
      */
     public function create(): View
     {
-        return view('form.create');
+           $fields = Field::all();
+        return view('Form.create', compact('fields'));
     }
     /**
      * Handle an incoming form request.
@@ -33,14 +36,18 @@ class FormController extends Controller
     {
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'description' => ['required', 'string', 'max:255'],
+            'description' => ['required', 'string', 'max:255']
         ]);
 
-        Form::create([
+        $form = Form::create([
+            
             'title' => $request->title,
             'description' => $request->description,
+            'user_id' => auth()->user()->id,
+            'last_updated_by'=>auth()->user()->name
         ]);
-
+        
+        $form->fields()->sync($request->fields);
         return redirect(route('form.index', absolute: false));
     }
 
@@ -56,24 +63,33 @@ class FormController extends Controller
     public function edit(string $id): View
     {
         $form = Form::findOrFail($id);
+        $fields = Field::all();
         return view('form.create', [
             'form' => $form,
+            'fields' => $fields,
         ]);
     }
 
     public function update(Request $request, string $id): RedirectResponse
     {
+        
         $form = Form::findOrFail($id);
+
+        Gate::authorize('update', $form);
 
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
+            'fields'=>['required','array'],
         ]);
 
         $form->update([
             'title' => $request->title,
             'description' => $request->description,
+            'user_id' => auth()->user()->id,
+            'last_updated_by'=>auth()->user()->name
         ]);
+        $form->fields()->sync($request->fields);
 
         return redirect(route('form.index', absolute: false));
     }
@@ -81,8 +97,8 @@ class FormController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         $form = Form::findOrFail($id);
+        $form->fields()->detach();
         $form->delete();
-
         return redirect(route('form.index', absolute: false))->with('success', 'Form deleted successfully');
     }
 }

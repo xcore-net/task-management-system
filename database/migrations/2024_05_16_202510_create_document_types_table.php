@@ -18,6 +18,9 @@ return new class extends Migration
 
             $table->unsignedBigInteger('form_id');
             $table->foreign('form_id')->references('id')->on('forms');
+            
+            $table->integer('user_id');
+            $table->string('last_updated_by');
 
             $table->timestamps();
         });
