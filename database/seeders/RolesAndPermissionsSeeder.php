@@ -17,8 +17,6 @@ class RolesAndPermissionsSeeder extends Seeder
     {
         //reset chached roles and permision
         app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
-        
-
        
         Permission::create(['name' => 'create field']);
         Permission::create(['name' => 'update field']);
@@ -41,13 +39,13 @@ class RolesAndPermissionsSeeder extends Seeder
        
        $admin = User::factory()->create([
         'email' => 'admin@admin.com',
+        'password'=> '123456789'
        ]);
        $admin->assignRole($roleAdmin);
 
        $user = User::factory()->create([
-        'email' => 'user@admin.com',
+        'email' => 'user@example.com',
        ]);
        $user->assignRole($roleUser);
     }
 }
-
