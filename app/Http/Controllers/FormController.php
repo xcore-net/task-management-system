@@ -75,8 +75,9 @@ class FormController extends Controller
         
         $form = Form::findOrFail($id);
 
-        Gate::authorize('update', $form);
-
+        if (! Gate::allows('update-form', $form)) {
+            abort(403);
+        }
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],

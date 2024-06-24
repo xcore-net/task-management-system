@@ -7,18 +7,26 @@
         @method('PUT')
         @endif
 
-        <!-- Title -->
-        <div>
-            <x-input-label for="title" :value="__('Title')" />
-            <x-text-input id="title" class="block mt-1 w-full" type="text" name="title" :value="old('title', isset($document_request) ? $document_request->title : '')" required autofocus autocomplete="title" />
-            <x-input-error :messages="$errors->get('title')" class="mt-2" />
+         <!-- Document Type -->
+         <div>
+            <x-input-label for="doc-request-form" :value="__('Document Type')" />
+            <select name="document_type_id" class="bg-transparent text-white" id="doc-request-form">
+                @foreach ($documentTypes as $documentType)
+                    <option  value="{{ $documentType->id }}">{{ $documentType->name }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('document_type_id')" class="mt-2" />
         </div>
-
-        <!-- Description -->
-        <div>
-            <x-input-label for="description" :value="__('Description')" />
-            <x-text-input id="description" class="block mt-1 w-full" type="text" name="description" :value="old('description', isset($document_request) ? $document_request->description : '')" required autocomplete="description" />
-            <x-input-error :messages="$errors->get('description')" class="mt-2" />
+        
+        <!-- Client -->
+         <div>
+            <x-input-label for="client-form" :value="__('Client')" />
+            <select name="client_id" class="bg-transparent text-white" id="client-form">
+                @foreach ($clients as $client)
+                    <option  value="{{ $client->id }}">{{ $client->name }}</option>
+                @endforeach
+            </select>
+            <x-input-error :messages="$errors->get('client_id')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
