@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::middleware(['role:admin'])->group(function () {
+    
         //form
         Route::get('/form', [FormController::class, 'index'])->name('form.index');
         Route::get('/form/create', [FormController::class, 'create'])->name('form.create');
@@ -77,9 +77,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/taskType/{id}/edit', [TaskTypeController::class, 'edit'])->name('taskType.edit');
         Route::put('/taskType/{id}', [TaskTypeController::class, 'update'])->name('taskType.update');
         Route::delete('/taskType/{id}', [TaskTypeController::class, 'destroy'])->name('taskType.destroy');
-    });
-
-    Route::middleware(['role:admin|user'])->group(function () {
+    
         Route::get('/client', [ClientController::class, 'index'])->name('client.index');
         Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
         Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
@@ -113,7 +111,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
-});
+
 
 
 require __DIR__ . '/auth.php';
