@@ -60,7 +60,7 @@ class FieldController extends Controller
     {
         $field = Field::findOrFail($id);
 
-        if (! Gate::allows('update-post', $field)) {
+        if (! Gate::allows('update-field', $field)) {
             abort(404);
         }
         $request->validate([
