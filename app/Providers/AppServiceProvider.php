@@ -8,8 +8,6 @@ use App\Models\UploadedFiles;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use App\Models\User;
-use Illuminate\Support\Facades\Gate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -39,4 +37,4 @@ class AppServiceProvider extends ServiceProvider
             return $user->id === $file->user_id;
         });
     }
-);}}
+}
