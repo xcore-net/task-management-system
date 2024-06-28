@@ -23,45 +23,7 @@ Route::get('/dashboard', function () {
     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-<<<<<<< HEAD
-Route::middleware('role:admin')->group(function () {
-    Route::delete('/client/{id}', [ClientController::class, 'destroy'])->name('client.destroy');
-    Route::delete('/form/{id}', [FormController::class, 'destroy'])->name('form.destroy');
-});
-Route::middleware('role:admin|user')->group(function () {
-     //form
-    Route::get('/form', [FormController::class, 'index'])->name('form.index');
-    Route::get('/form/create', [FormController::class, 'create'])->name('form.create');
-    Route::post('/form/store', [FormController::class, 'store'])->name('form.store');
-    Route::get('/form/{id}', [FormController::class, 'show'])->name('form.show');
-    Route::get('/form/{id}/edit', [FormController::class, 'edit'])->name('form.edit');
-    Route::put('/form/{id}', [FormController::class, 'update'])->name('form.update');
-
-    //field
-    Route::get('/field', [FieldController::class, 'index'])->name('field.index');
-    Route::get('/field/create', [FieldController::class, 'create'])->name('field.create');
-    Route::post('/field', [FieldController::class, 'store'])->name('field.store');
-    Route::get('/field/{id}', [FieldController::class, 'show'])->name('field.show');
-    Route::get('/field/{id}/edit', [FieldController::class, 'edit'])->name('field.edit');
-    Route::put('/field/{id}', [FieldController::class, 'update'])->name('field.update');
-    Route::delete('/field/{id}', [FieldController::class, 'destroy'])->name('field.destroy');
     
-});
-    //client
-    Route::get('/client', [ClientController::class, 'index'])->name('client.index');
-    Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
-    Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
-    Route::get('/client/{id}', [ClientController::class, 'show'])->name('client.show');
-    Route::get('/client/{id}/edit', [ClientController::class, 'edit'])->name('client.edit');
-    Route::put('/client/{id}', [ClientController::class, 'update'])->name('client.update');
-    
-
-   
-    
-
-    
-=======
-    Route::middleware(['role:admin'])->group(function () {
         //form
         Route::get('/form', [FormController::class, 'index'])->name('form.index');
         Route::get('/form/create', [FormController::class, 'create'])->name('form.create');
@@ -88,7 +50,6 @@ Route::middleware('role:admin|user')->group(function () {
         Route::get('/documentType/{id}/edit', [DocumentTypeController::class, 'edit'])->name('documentType.edit');
         Route::put('/documentType/{id}', [DocumentTypeController::class, 'update'])->name('documentType.update');
         Route::delete('/documentType/{id}', [DocumentTypeController::class, 'destroy'])->name('documentType.destroy');
->>>>>>> d6ac23ba19d435298527ec469c3c33bd50ec3683
 
         //Assignee
         Route::get('/assignee', [AssigneeController::class, 'index'])->name('assignee.index');
@@ -116,9 +77,7 @@ Route::middleware('role:admin|user')->group(function () {
         Route::get('/taskType/{id}/edit', [TaskTypeController::class, 'edit'])->name('taskType.edit');
         Route::put('/taskType/{id}', [TaskTypeController::class, 'update'])->name('taskType.update');
         Route::delete('/taskType/{id}', [TaskTypeController::class, 'destroy'])->name('taskType.destroy');
-    });
-
-    Route::middleware(['role:admin|user'])->group(function () {
+    
         Route::get('/client', [ClientController::class, 'index'])->name('client.index');
         Route::get('/client/create', [ClientController::class, 'create'])->name('client.create');
         Route::post('/client/store', [ClientController::class, 'store'])->name('client.store');
@@ -152,7 +111,7 @@ Route::middleware('role:admin|user')->group(function () {
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
-});
+
 
 
 require __DIR__ . '/auth.php';

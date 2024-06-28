@@ -8,6 +8,9 @@ use App\Http\Controllers\Api\ApiUploadedFilesController;
 use App\Http\Controllers\Api\ApiDocumentTypeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\ApiFieldController;
+
+
 
 Route::get('/user', function (Request $request) {
     return $request->user();
