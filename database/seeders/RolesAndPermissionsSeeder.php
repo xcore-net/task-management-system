@@ -33,19 +33,19 @@ class RolesAndPermissionsSeeder extends Seeder
        $roleAdmin->givePermissionTo(Permission::all());
 
        $roleUser = Role::create(['name' => 'user']);
-       $roleUser->givePermissionTo(['create field', 'update field', 'view field']);
+      // $roleUser->givePermissionTo(['create field', 'update field', 'view field']);
        $roleUser->givePermissionTo(['create form', 'update form', 'view form']);
         
        
        $admin = User::factory()->create([
-        'email' => 'admin@admin.com',
-        'password'=> '123456789'
+        'email' => 'admin@adminn.com',
+        
        ]);
-       $admin->assignRole($roleAdmin);
+       $admin->assignRole('admin');
 
        $user = User::factory()->create([
-        'email' => 'user@example.com',
+        'email' => 'user@examplee.com',
        ]);
-       $user->assignRole($roleUser);
+       $user->assignRole('user');
     }
 }

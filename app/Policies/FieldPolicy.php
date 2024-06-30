@@ -2,24 +2,24 @@
 
 namespace App\Policies;
 
-use App\Models\Form;
+use App\Models\Field;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class FormPolicy
+class FieldPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user?true:false;
+        //
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Form $form): bool
+    public function view(User $user, Field $field): bool
     {
         //
     }
@@ -29,31 +29,30 @@ class FormPolicy
      */
     public function create(User $user): bool
     {
-       //// return $user?true:false;
+        // // return $user->name === 'saleem';
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Form $form): bool
+    public function update(User $user, Field $field): bool
     {
-       return $user->id === $form->user_id  ||$form->user_id ===4  ;
-        //?:Response::allow::Response:denyWithStatus(404);
+        // return $user->id === $form->user_id ?Response:denyWithStatus(404);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Form $form): bool
+    public function delete(User $user, Field $field): bool
     {
-      // // return $user->id === $form->user_id  ;
-
+       
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Form $form): bool
+    public function restore(User $user, Field $field): bool
     {
         //
     }
@@ -61,7 +60,7 @@ class FormPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Form $form): bool
+    public function forceDelete(User $user, Field $field): bool
     {
         //
     }

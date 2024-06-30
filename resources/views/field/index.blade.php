@@ -15,7 +15,7 @@
                     </x-nav-link>
                 </div>
                 <div class=" w-full">
-                    <table class="w-full table-auto text-left text-white">
+                    <table class="w-full table-auto text-left">
                         <thead>
                             <tr class="text-left">
                                 <th>ID</th>
@@ -46,7 +46,7 @@
                                     <form method="POST" action="{{ route('field.destroy', $field->id) }}">
                                         @csrf
                                         @method('DELETE')
-                                        <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this form?');">
+                                        <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this field?');">
                                             {{ __('Delete') }}
                                         </x-danger-button>
                                     </form>

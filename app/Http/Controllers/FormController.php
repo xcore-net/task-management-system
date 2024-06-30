@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Models\Form;
 use App\Models\Field;
 use Illuminate\Support\Facades\Gate;
@@ -14,18 +15,19 @@ class FormController extends Controller
 {
 
     public function index(): View
-    {
-        $forms = Form::with('fields')->get();
+    {   $forms = Form::all();
+        // $forms = Form::with('fields')->get();
 
-        return view('Form.index', compact('forms'));
+        return view('form.index',["forms"=>$forms]);
     }
     /**
      * Display the create form view.
      */
     public function create(): View
     {
-           $fields = Field::all();
-        return view('Form.create', compact('fields'));
+        //  if (auth()->user()->can('create',Form::class)){ 
+        return view('form.create');
+    //}
     }
     /**
      * Handle an incoming form request.
@@ -47,7 +49,7 @@ class FormController extends Controller
             'last_updated_by'=>auth()->user()->name
         ]);
         
-        $form->fields()->sync($request->fields);
+       
         return redirect(route('form.index', absolute: false));
     }
 
@@ -63,10 +65,10 @@ class FormController extends Controller
     public function edit(string $id): View
     {
         $form = Form::findOrFail($id);
-        $fields = Field::all();
+        // $fields = Field::all();
         return view('form.create', [
             'form' => $form,
-            'fields' => $fields,
+            // 'fields' => $fields,
         ]);
     }
 
@@ -74,14 +76,35 @@ class FormController extends Controller
     {
         
         $form = Form::findOrFail($id);
+      
+       // Gate::authorize('update-form', $form);
 
-        if (! Gate::allows('update-form', $form)) {
-            abort(403);
-        }
+
+    //     if (Gate::denies('update-form', $form)) {
+    //          abort(404);
+    //}
+    
+//     if (! auth()->user()->can('update-form', $form)) {
+//         abort(404);
+     
+//   }
+// if (!Gate::allows('update-form', $form)) {
+//     abort(403);
+// }
+
+
+//policy
+if (!Gate::allows('update', $form)) {
+    abort(403);
+}
+  
+// if (!auth()->user()->can('update',Form::class))
+// { abort(403);}
+
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:255'],
-            'fields'=>['required','array'],
+            // 'fields'=>['required','array'],
         ]);
 
         $form->update([
@@ -90,7 +113,7 @@ class FormController extends Controller
             'user_id' => auth()->user()->id,
             'last_updated_by'=>auth()->user()->name
         ]);
-        $form->fields()->sync($request->fields);
+      
 
         return redirect(route('form.index', absolute: false));
     }
@@ -98,7 +121,7 @@ class FormController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         $form = Form::findOrFail($id);
-        $form->fields()->detach();
+        // $form->fields()->detach();
         $form->delete();
         return redirect(route('form.index', absolute: false))->with('success', 'Form deleted successfully');
     }

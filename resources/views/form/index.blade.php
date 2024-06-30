@@ -14,8 +14,10 @@
                         {{ __('Create') }}
                     </x-nav-link>
                 </div>
-                <div class=" w-full">
-                    <table class="text-white w-full table-auto text-left">
+
+                <div class="w-full ">
+                   
+                    <table class=" w-full table-auto text-left">
                         <thead>
                             <tr class="text-left">
                                 <th>ID</th>
@@ -23,7 +25,7 @@
                                 <th>Description</th>
                                 <th>User ID</th>
                                 <th>Last Updated By</th>
-                                <th>Fields</th>
+                          
                                 <th>Created At</th>
                                 <th>Updated At</th>
                                 <th>Actions</th>
@@ -37,25 +39,22 @@
                                 <td>{{ $form->description }}</td>
                                 <td>{{ $form->user_id }}</td>
                                 <td>{{ $form->last_updated_by }}</td>
-                                <td><select>
-                                     @foreach ($form->fields as $field)
-                                     <option value="{{ $field->id }}">{{ $field->label }}</option>
-                                      @endforeach
-                                    </select></td>
-                                    
+                        
                                 <td>{{ $form->created_at }}</td>
                                 <td>{{ $form->updated_at }}</td>
+                                <td>{{ $form->action }}</td>
                                 <td>
                                     <a href="{{ url('/form/' . $form->id) }}" class="btn btn-xs btn-info pull-right">View</a>
                                     <a href="{{ url('/form/' . $form->id . '/edit') }}" class="btn btn-xs btn-info pull-right">Edit</a>
-                                    <!-- Delete Button -->
+                                     <!-- Delete Button -->
 
-                                    <form method="POST" action="{{ route('form.destroy', $form->id) }}">
+                                     <form method="POST" action="{{ route('form.destroy', $form->id) }}">
                                         @csrf
                                         @method('DELETE')
                                         <x-danger-button class="mt-4" onclick="return confirm('Are you sure you want to delete this form?');">
                                             {{ __('Delete') }}
                                         </x-danger-button>
+                                      
                                     </form>
 
                                 </td>
@@ -69,7 +68,7 @@
 
 
                         </tbody>
-                    </table>
+                    </table> 
 
 
 

@@ -21,14 +21,7 @@
             <x-input-error :messages="$errors->get('description')" class="mt-2" />
         </div>
 
-        <div>
-        <x-input-label for="form-fields" :value="__('Fields')" />
-            <select name="fields[]" class="bg-transparent" id="form-fields" multiple>
-                @foreach ($fields as $field)
-                    <option class="text-white" value="{{ $field->id }}">{{ $field->label }}</option>
-                @endforeach
-            </select>
-        </div>
+     
 
         <div class="flex items-center justify-end mt-4">
             <x-primary-button class="ms-4">

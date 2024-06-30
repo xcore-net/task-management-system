@@ -16,12 +16,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-//Form
-Route::get('/form', [ApiFormController::class, 'index']);
-Route::post('/form/store', [ApiFormController::class, 'store']);
-Route::get('/form/{id}', [ApiFormController::class, 'show']);
-Route::put('/form/{id}', [ApiFormController::class, 'update']);
-Route::delete('/form/{id}', [ApiFormController::class, 'destroy']);
+// //Form
+// Route::get('/form', [ApiFormController::class, 'index']);
+// Route::post('/form/store', [ApiFormController::class, 'store']);
+// Route::get('/form/{id}', [ApiFormController::class, 'show']);
+// Route::put('/form/{id}', [ApiFormController::class, 'update']);
+// Route::delete('/form/{id}', [ApiFormController::class, 'destroy']);
 
 //Uploded Files
 Route::get('/uploaded_files', [ApiUploadedFilesController::class, 'index'])->name('uploaded_files.index');

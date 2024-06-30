@@ -15,7 +15,7 @@
                     </x-nav-link>
                 </div>
                 <div class=" w-full">
-                    <table class="text-white w-full table-auto text-left">
+                    <table class=" w-full table-auto text-left">
                         <thead>
                             <tr class="text-left">
                                 <th>ID</th>

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
 
+            $table->enum('status', ['complete', 'inprogress', 'missed_due_to_time', 'dismissed', 'draft']);
+            $table->date('due_date');
 
             $table->unsignedBigInteger('client_id');
             $table->foreign('client_id')->references('id')->on('clients');

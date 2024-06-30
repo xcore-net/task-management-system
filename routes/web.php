@@ -24,6 +24,11 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     
+    // Route::middleware('role:admin|user')->group(function () {
+    //     Route::delete('/form/{id}', [FormController::class, 'destroy'])->name('form.destroy');
+    // });
+    //Route::middleware('role:admin')->group(function () {
+
         //form
         Route::get('/form', [FormController::class, 'index'])->name('form.index');
         Route::get('/form/create', [FormController::class, 'create'])->name('form.create');
@@ -112,6 +117,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     });
 
-
+///});
 
 require __DIR__ . '/auth.php';

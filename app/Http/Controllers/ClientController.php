@@ -18,7 +18,7 @@ class ClientController extends Controller
     {
         $clients = Client::with('documentTypes')->get();
 
-        return view('Client.index', compact('clients'));
+        return view('client.index', compact('clients'));
     }
     /**
      * Display the create client view.
@@ -27,7 +27,7 @@ class ClientController extends Controller
     {
         $documentTypes = DocumentType::all();
         $forms = Form::all();
-        return view('Client.create', ['documentTypes' => $documentTypes, "forms" => $forms]);
+        return view('client.create', ['documentTypes' => $documentTypes, "forms" => $forms]);
     }
     /**
      * Handle an incoming client request.
