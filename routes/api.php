@@ -6,11 +6,14 @@ use App\Http\Controllers\Api\ApiTaskController;
 use App\Http\Controllers\Api\ApiTaskTypeController;
 use App\Http\Controllers\Api\ApiUploadedFilesController;
 use App\Http\Controllers\Api\ApiDocumentTypeController;
+use App\Http\Controllers\Api\ApiFilesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ApiFieldController;
 
 
+
+Route::post('/upload-file', [ApiFilesController::class, 'uploadFile']);
 
 Route::get('/user', function (Request $request) {
     return $request->user();
