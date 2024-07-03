@@ -38,7 +38,7 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        $token = $user->currentAccessToken();
+        $token = $user->createToken('auth_token');
 
         return response()->json(['access_token' => $token, 'token_type' => 'Bearer'], 200);
     }

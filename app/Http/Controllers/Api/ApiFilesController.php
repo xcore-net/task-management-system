@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ApiFilesController extends Controller
 {
-    public function createfile(Request $request)
+    public function uploadFile(Request $request)
     {if ($request->hasFile('file')) {
         $file = $request->file('file');
         //in folder thumbs in public 
