@@ -38,8 +38,8 @@ class RolesAndPermissionsSeeder extends Seeder
         
        
        $admin = User::factory()->create([
-        'email' => 'admin@admin.com',
-        'password'=> '123456789'
+        'email' => 'saleem@admin.com',
+        
        ]);
        $admin->assignRole($roleAdmin);
 

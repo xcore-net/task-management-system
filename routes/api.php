@@ -9,11 +9,25 @@ use App\Http\Controllers\Api\ApiDocumentTypeController;
 use App\Http\Controllers\Api\ApiFilesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\ApiFieldController;
+use App\Http\Controllers\Api\AuthController;
+use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+Route::middleware([EnsureFrontendRequestsAreStateful::class])->group(function () {
+    // Define your API routes here
+    Route::post('register', [AuthController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('logout', [AuthController::class, 'logout']);
+});
 
+//auth apis
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/upload-file', [ApiFilesController::class, 'uploadFile']);
 
-Route::post('/upload-file', [ApiFilesController::class, 'uploadFile']);
+    
+});
 
 Route::get('/user', function (Request $request) {
     return $request->user();
