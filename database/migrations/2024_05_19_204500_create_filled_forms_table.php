@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('filled_forms', function (Blueprint $table) {
-            
-            $table->unsignedInteger('form_id');
-            $table->unsignedInteger('client_id');
-            $table->foreign('form_id')->references('id')->on('forms')->onDelete('cascade');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
+            $table->id('id');
+
+            $table->unsignedBigInteger('form_id');
+            $table->foreign('form_id')->references('id')->on('forms');
+
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients');
+
+
 
             $table->timestamps();
         });
@@ -28,7 +32,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('filled_forms');
-        Schema::dropForeign('form_id');
-        Schema::dropForeign('client_id');
+        
     }
 };

@@ -31,7 +31,7 @@ class ApiFieldController extends Controller
             'name' => $request->name,
             'label' => $request->label,
              'user_id' => 3,
-            'last_updated_by' => 'saleem'
+            'last_updated_by' => 'shahd'
         ]);
 
 

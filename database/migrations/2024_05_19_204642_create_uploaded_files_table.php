@@ -11,12 +11,16 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('uploaded_files', function (Blueprint $table) {
+            $table->id('id');
+
             $table->string('name');
-            $table->unsignedInteger('size');
-            $table->unsignedInteger('form_id');
-            $table->unsignedInteger('client_id');
-            $table->foreign(['form_id'])->references('form_id')->on('filled_forms')->onDelete('cascade');
-            $table->foreign(['client_id'])->references('client_id')->on('filled_forms')->onDelete('cascade');
+            $table->integer('size');
+
+            $table->unsignedBigInteger('filled_form_id')->nullable(); // Fixed typo here
+            $table->foreign('filled_form_id')->references('id')->on('filled_forms');
+
+            $table->unsignedBigInteger('client_id');
+            $table->foreign('client_id')->references('id')->on('clients');
 
             $table->timestamps();
         });
@@ -28,6 +32,6 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('uploaded_files');
-        Schema::dropForeign(['form_id', 'client_id']);
+     
     }
 };
