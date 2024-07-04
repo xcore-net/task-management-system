@@ -17,6 +17,8 @@
                     </x-nav-link>
                     <x-nav-link :href="route('form.index')" :active="request()->routeIs('form.index')">
                         {{ __('Form') }}
+                    </x-nav-link><x-nav-link :href="route('field.index')" :active="request()->routeIs('field.index')">
+                        {{ __('Field') }}
                     </x-nav-link>
                 </div>
             </div>

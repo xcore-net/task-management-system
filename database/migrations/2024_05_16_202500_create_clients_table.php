@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
+            $table->bigInteger('user_id');
+            $table->bigInteger('last_updated_by');
             $table->timestamps();
         });
     }

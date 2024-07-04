@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Field;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -22,7 +23,9 @@ class FormController extends Controller
      */
     public function create(): View
     {
-        return view('form.create');
+        $fields = Field::all();
+        $formfields = [];
+        return view('form.create', ['fields' => $fields, 'formfields' => $formfields]);
     }
     /**
      * Handle an incoming form request.
@@ -55,9 +58,11 @@ class FormController extends Controller
 
     public function edit(string $id): View
     {
+        $fields = Field::all();
         $form = Form::findOrFail($id);
         return view('form.create', [
             'form' => $form,
+            'fields' => $fields
         ]);
     }
 
@@ -74,7 +79,7 @@ class FormController extends Controller
             'title' => $request->title,
             'description' => $request->description,
         ]);
-
+        // $request->formfields
         return redirect(route('form.index', absolute: false));
     }
 

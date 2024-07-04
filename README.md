@@ -168,3 +168,6 @@ Conclusion
 By following these steps, you can effectively manage roles and permissions in your Laravel application using the Spatie package. This setup ensures a scalable and maintainable approach to handling user authorization in your project.
 
 https://medium.com/@miladev95/step-by-step-guide-to-user-role-and-permission-tutorial-in-laravel-10-1fecdabfdea0
+
+
+php artisan db:seed --class=RolesAndPermissionsSeeder
